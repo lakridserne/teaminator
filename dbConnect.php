@@ -21,7 +21,7 @@ class DB{
   }
 
   // Count
-  function count($sql,$values) {
+  function count($sql,$values=false) {
     $db = $this->connect();
     $query = $db->prepare($sql);
     foreach($values as list($name,$value)) {

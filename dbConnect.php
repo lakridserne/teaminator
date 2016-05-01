@@ -47,3 +47,4 @@ class DB{
     return $db;
   }
 }
+?>

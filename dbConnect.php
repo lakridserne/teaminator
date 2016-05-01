@@ -24,8 +24,10 @@ class DB{
   function count($sql,$values=false) {
     $db = $this->connect();
     $query = $db->prepare($sql);
-    foreach($values as list($name,$value)) {
-      $query->bindValue($name, $value);
+    if($values != false) {
+      foreach($values as list($name,$value)) {
+        $query->bindValue($name, $value);
+      }
     }
     $query->execute();
     return $query->rowCount();

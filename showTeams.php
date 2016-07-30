@@ -5,14 +5,8 @@
 */
 include("dbConnect.php");
 $db = new DB;
-?>
-<!DOCTYPE html>
-<head>
-  <title>Coding Pirates Team-inator</title>
-</head>
-<h1>Coding Pirates Team-inator til Coding Pirates Game Jam 2015!</h1>
-<h2>Teams</h2>
-<?php
+include("header.php");
+
 // Get teams and show them
 $number_teams = "SELECT team_ID FROM team ORDER BY team_ID DESC LIMIT 1";
 $number_teams_result = $db->count($number_teams);

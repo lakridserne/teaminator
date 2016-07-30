@@ -5,12 +5,8 @@
 */
 include("dbConnect.php");
 $db = new DB;
+include("header.php");
 ?>
-<!DOCTYPE html>
-<head>
-  <title>Coding Pirates Team-inator</title>
-</head>
-<h1>Coding Pirates Team-inator til Coding Pirates Game Jam 2015!</h1>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 Antal: <input type="number" name="teamsize" /><br />
 Mindst alder: <input type="number" name="minage" /><br />

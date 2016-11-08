@@ -19,4 +19,3 @@ $teaminator_url = "https://www.rathhansen.com/teaminator/";
   </div>
 </nav>
 <div class="container">
-<?php echo $_SERVER['PHP_SELF']; ?>

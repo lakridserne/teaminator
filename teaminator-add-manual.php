@@ -54,3 +54,6 @@ include("header.php");
 
   <input type="submit" name="submit" value="Bliv Team-inated!" />
 </form>
+<?php
+include("footer.php");
+?>

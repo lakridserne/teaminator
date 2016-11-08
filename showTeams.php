@@ -30,4 +30,5 @@ for($i=1;$i<=$number_teams_result;$i++) {
   }
   echo "<br /><br />";
 }
+include("footer.php");
 ?>

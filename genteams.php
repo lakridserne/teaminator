@@ -28,4 +28,5 @@ if(isset($_REQUEST['submit'])) {
   </pre>
   <?php
 }
+include("footer.php");
 ?>

@@ -35,9 +35,15 @@ class DB{
 
   // Connect to db
   private function connect() {
-    $dsn = "mysql:dbname=teaminator;host=127.0.0.1";
-    $user = "teaminator";
-    $password = "password";
+    // first, get config file
+    if(file_exists("config.php")) {
+      include_once("config.php");
+    } else {
+      die("No config file");
+    }
+    $dsn = "mysql:dbname=" . $db . ";host=" . $host;
+    $user = $user;
+    $password = $pass;
 
     try {
       $db = new PDO($dsn,$user,$password);

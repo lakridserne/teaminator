@@ -13,6 +13,10 @@ $teaminator_url = "https://www.rathhansen.com/teaminator/";
     <div class="navbar-header">
       <a class="navbar-brand" href="<?php echo $teaminator_url; ?>" title="Coding Pirates Teaminator">Coding Pirates Team-inator til Coding Pirates Game Jam 2016!</a>
     </div>
+    <ul class="nav navbar-nav">
+
+    </ul>
   </div>
 </nav>
 <div class="container">
+<?php echo $_SERVER['PHP_SELF']; ?>

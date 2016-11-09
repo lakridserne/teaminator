@@ -1,5 +1,13 @@
 <?php
 $teaminator_url = "https://www.rathhansen.com/teaminator/";
+
+function echoActiveClassIfRequestMatches($requestUri)
+{
+    $current_file_name = basename($_SERVER['REQUEST_URI'], ".php");
+
+    if ($current_file_name == $requestUri)
+        echo 'class="active"';
+}
 ?>
 <!DOCTYPE html>
 <head>
@@ -14,7 +22,11 @@ $teaminator_url = "https://www.rathhansen.com/teaminator/";
       <a class="navbar-brand" href="<?php echo $teaminator_url; ?>" title="Coding Pirates Teaminator">Coding Pirates Teaminator til Coding Pirates Gamejam 2016!</a>
     </div>
     <ul class="nav navbar-nav">
-
+      <li> <?php echo echoActiveClassIfRequestMatches("index"); ?>
+        <a href="index.php" title="Coding Pirates Teaminator hjem">
+          Hjem
+        </a>
+      </li>
     </ul>
   </div>
 </nav>

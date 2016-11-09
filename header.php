@@ -29,7 +29,7 @@ function echoActiveClassIfRequestMatches($requestUri)
         </a>
       </li>
       <li <?php echo echoActiveClassIfRequestMatches("teaminator-add-manual"); ?>>
-        <a href=<?php echo $teaminator_url . "/teaminator-add-manual.php"; ?> title="Tilføj person manuelt">
+        <a href=<?php echo $teaminator_url . "teaminator-add-manual.php"; ?> title="Tilføj person manuelt">
           Tilføj person manuelt
         </a>
       </li>

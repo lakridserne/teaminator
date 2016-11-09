@@ -24,12 +24,12 @@ function echoActiveClassIfRequestMatches($requestUri)
     </div>
     <ul class="nav navbar-nav">
       <li <?php echo echoActiveClassIfRequestMatches("index"); ?>>
-        <a href="index.php" title="Coding Pirates Teaminator hjem">
+        <a href=<?php echo $teaminator_url; ?> title="Coding Pirates Teaminator hjem">
           Hjem
         </a>
       </li>
       <li <?php echo echoActiveClassIfRequestMatches("teaminator-add-manual"); ?>>
-        <a href="teaminator-add-manual.php" title="Tilføj person manuelt">
+        <a href=<?php echo $teaminator_url . "/teaminator-add-manual.php"; ?> title="Tilføj person manuelt">
           Tilføj person manuelt
         </a>
       </li>

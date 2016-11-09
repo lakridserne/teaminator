@@ -3,7 +3,7 @@ $teaminator_url = "https://www.rathhansen.com/teaminator/";
 
 function echoActiveClassIfRequestMatches($requestUri)
 {
-    $current_file_name = basename($_SERVER['REQUEST_URI'], ".php");
+    $current_file_name = basename($_SERVER['PHP_SELF'], ".php");
 
     if ($current_file_name == $requestUri)
         echo 'class="active"';
@@ -22,7 +22,7 @@ function echoActiveClassIfRequestMatches($requestUri)
       <a class="navbar-brand" href="<?php echo $teaminator_url; ?>" title="Coding Pirates Teaminator">Coding Pirates Teaminator til Coding Pirates Gamejam 2016!</a>
     </div>
     <ul class="nav navbar-nav">
-      <li> <?php echo echoActiveClassIfRequestMatches("index"); ?>
+      <li <?php echo echoActiveClassIfRequestMatches("index"); ?>>
         <a href="index.php" title="Coding Pirates Teaminator hjem">
           Hjem
         </a>

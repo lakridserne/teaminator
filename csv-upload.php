@@ -10,9 +10,12 @@ if(!isset($_REQUEST['submit'])) {
   ?>
   <h2>Upload CSV fil med medlemmer.</h2>
   <form enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-    <input type="hidden" name="MAX_FILE_SIZE" value="51200" />
-    Vælg filen eller træk den hen på: <input type="file" name="csv_file" />
-    <input type="submit" name="submit" value="Send filen" />
+    <div class="form-group">
+      <input type="hidden" name="MAX_FILE_SIZE" value="51200" />
+      <label for="csvInputFile">Vælg filen eller træk den hen på:</label>
+      <input type="file" class="form-control-file" id="csvInputFile" name="csv_file" />
+    </div>
+    <input type="submit" class="btn btn-primary" name="submit" value="Send filen" />
   </form>
   <?php
 } else {

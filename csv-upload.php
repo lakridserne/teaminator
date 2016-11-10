@@ -8,7 +8,7 @@ include("header.php");
 
 if(!isset($_REQUEST['submit'])) {
   ?>
-  <h2>Upload CSV fil med medlemmer.</h2>
+  <h2>Upload CSV fil med medlemmer</h2>
   <form enctype="multipart/form-data" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <div class="form-group">
       <input type="hidden" name="MAX_FILE_SIZE" value="51200" />

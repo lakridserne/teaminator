@@ -5,8 +5,9 @@ function echoActiveClassIfRequestMatches($requestUri)
 {
     $current_file_name = basename($_SERVER['PHP_SELF'], ".php");
 
-    if ($current_file_name == $requestUri)
+    if ($current_file_name == $requestUri) {
         echo 'class="active"';
+      }
 }
 ?>
 <!DOCTYPE html>
@@ -24,13 +25,18 @@ function echoActiveClassIfRequestMatches($requestUri)
     </div>
     <ul class="nav navbar-nav">
       <li <?php echo echoActiveClassIfRequestMatches("index"); ?>>
-        <a href=<?php echo $teaminator_url; ?> title="Coding Pirates Teaminator hjem">
+        <a href="<?php echo $teaminator_url; ?>" title="Coding Pirates Teaminator hjem">
           Hjem
         </a>
       </li>
       <li <?php echo echoActiveClassIfRequestMatches("teaminator-add-manual"); ?>>
-        <a href=<?php echo $teaminator_url . "teaminator-add-manual.php"; ?> title="Tilføj person manuelt">
+        <a href="<?php echo $teaminator_url . 'teaminator-add-manual.php'; ?>" title="Tilføj person manuelt">
           Tilføj person manuelt
+        </a>
+      </li>
+      <li <?php echo echoActiveClassIfRequestMatches("csv-upload"); ?>>
+        <a href="<?php echo $teaminator_url . 'csv-upload.php'; ?>" title="Upload CSV fil">
+          Upload CSV fil
         </a>
       </li>
     </ul>

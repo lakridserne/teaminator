@@ -20,7 +20,54 @@ if(!isset($_REQUEST['submit'])) {
   <?php
 } else {
   // Code to use CSV file.
+  try {
+    if(
+        !isset($_FILES['csv_file']['error']) ||
+        is_array($_FILES['csv_file']['error'])
+      ) {
+      throw new RuntimeException("Invalid params");
+    }
 
+    switch($_FILES['csv_file']['error']) {
+      case UPLOAD_ERR_OK:
+        break;
+      case UPLOAD_ERR_NO_FILE:
+        throw new RuntimeException("Husk filen!");
+      case UPLOAD_ERR_INI_SIZE:
+      case UPLOAD_ERR_FORM_SIZE:
+        throw new RuntimeException("Prøv med en mindre fil");
+      default:
+        throw new RuntimeException("Noget uventet gik galt. Spørg Kristoffer!");
+    }
+
+    // Check filesize
+    if($_FILES['csv_file']['size'] > 51200) {
+      throw new RuntimeException("Filen er for stor.");
+    }
+
+    // Check type!
+    $finfo = new finfo(FILEINFO_MIME_TYPE);
+    if(false === $ext = array_search(
+      $finfo->file($_FILES['csv_file']['tmp_name']),
+      array(
+        'csv' => 'text/csv',
+      ),
+      true
+    )) {
+      throw new RuntimeException("Forkert filformat");
+    }
+    if(!move_uploaded_file(
+      $_FILES['csv_file']['tmp_name'],
+      sprintf('./uploads/%s.%s',
+        sha1_file($_FILES['csv_file']['tmp_name']),
+        $ext
+      )
+    )) {
+      throw new RuntimeException("Kunne ikke flytte filen");
+    }
+  } catch(RuntimeException $e) {
+    echo $e->getMessage();
+  }
 }
 include("footer.php");
 ?>

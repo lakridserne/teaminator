@@ -51,6 +51,7 @@ if(!isset($_REQUEST['submit'])) {
       $finfo->file($_FILES['csv_file']['tmp_name']),
       array(
         'csv' => 'text/csv',
+        'csv' => 'text/plain',
       ),
       true
     )) {
@@ -68,6 +69,9 @@ if(!isset($_REQUEST['submit'])) {
   } catch(RuntimeException $e) {
     echo $e->getMessage();
   }
+
+  // Now we have the file scrubbed - read and put in DB
+
 }
 include("footer.php");
 ?>

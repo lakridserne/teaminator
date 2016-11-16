@@ -4,6 +4,7 @@
 * Used to generate teams at Coding Pirates Game Jam 2015-2016
 */
 
+include("dbConnect.php");
 include("header.php");
 
 if(!isset($_REQUEST['submit'])) {
@@ -72,10 +73,19 @@ if(!isset($_REQUEST['submit'])) {
   }
 
   // Now we have the file scrubbed - read and put in DB
-  //$filehandle = fopen($new_file_location,'r');
-  $row = 1;
   if(($filehandle = fopen($new_file_location, 'r')) !== false) {
     while(($data = fgetcsv($filehandle,1000,';')) !== false) {
+      /*
+      * This is the indiviual row
+      * [0] => Navn
+      * [1] => Alder
+      * [2] => Opskrevet
+      * [3] => Tlf (barn)
+      * [4] => Email (barn)
+      * [5] => Tlf (forælder)
+      * [6] => Email (familie)
+      * [7] => Postnummer
+      */
       print_r($data);
     }
     fclose($filehandle);

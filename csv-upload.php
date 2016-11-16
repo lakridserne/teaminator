@@ -57,12 +57,13 @@ if(!isset($_REQUEST['submit'])) {
     )) {
       throw new RuntimeException("Forkert filformat");
     }
+    $new_file_location = sprintf('./uploads/%s.%s',
+      sha1_file($_FILES['csv_file']['tmp_name']),
+      $ext
+    );
     if(!move_uploaded_file(
       $_FILES['csv_file']['tmp_name'],
-      sprintf('./uploads/%s.%s',
-        sha1_file($_FILES['csv_file']['tmp_name']),
-        $ext
-      )
+      $new_file_location
     )) {
       throw new RuntimeException("Kunne ikke flytte filen");
     }
@@ -71,7 +72,8 @@ if(!isset($_REQUEST['submit'])) {
   }
 
   // Now we have the file scrubbed - read and put in DB
-
+  $filehandle = fopen($new_file_location,'r');
+  print_r(fgetcsv($filehandle,0,';'));
 }
 include("footer.php");
 ?>

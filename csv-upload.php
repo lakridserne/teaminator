@@ -92,7 +92,9 @@ if(!isset($_REQUEST['submit'])) {
         $firstLine = false;
         continue;
       }
-      print_r($data);
+
+      // Now make connection to the database and import data
+      $db = new DB;
     }
     fclose($filehandle);
   }

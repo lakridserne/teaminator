@@ -73,6 +73,7 @@ if(!isset($_REQUEST['submit'])) {
   }
 
   // Now we have the file scrubbed - read and put in DB
+  $firstLine = true;
   if(($filehandle = fopen($new_file_location, 'r')) !== false) {
     while(($data = fgetcsv($filehandle,1000,';')) !== false) {
       /*
@@ -86,6 +87,11 @@ if(!isset($_REQUEST['submit'])) {
       * [6] => Email (familie)
       * [7] => Postnummer
       */
+      // Jump over first line with headings
+      if($firstLine == true) {
+        $firstLine = false;
+        continue;
+      }
       print_r($data);
     }
     fclose($filehandle);

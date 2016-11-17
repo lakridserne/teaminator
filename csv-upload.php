@@ -114,6 +114,7 @@ if(!isset($_REQUEST['submit'])) {
         [":updated_since_csv",0],
         [":teaminated",0]
       ];
+      $db->query($sql,$values);
     }
     fclose($filehandle);
   }

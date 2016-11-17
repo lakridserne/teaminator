@@ -9,8 +9,8 @@ $db = new DB;
 if(isset($_REQUEST['submit'])) {
   // Form already filled out
   $sql = "INSERT INTO participants
-    (name,age,visualprog,textprog,graphic,teaminated)
-    VALUES (:name, :age, :visualprog, :textprog, :graphic, false)";
+    (name,age,visualprog,textprog,graphic,updated_since_csv,teaminated)
+    VALUES (:name, :age, :visualprog, :textprog, :graphic, true, false)";
 
   // if statements determining whether the interests should be true or false
   if(isset($_REQUEST['visualprog'])) {

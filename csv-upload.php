@@ -77,7 +77,7 @@ if(!isset($_REQUEST['submit'])) {
   $firstLine = true;
   if(($filehandle = fopen($new_file_location, 'r')) !== false) {
     while(($data = fgetcsv($filehandle,1000,';')) !== false) {
-      $participants += 1;
+      $participants++
       /*
       * This is the indiviual row
       * [0] => Navn
@@ -92,6 +92,7 @@ if(!isset($_REQUEST['submit'])) {
       // Jump over first line with headings
       if($firstLine == true) {
         $firstLine = false;
+        $participants--;
         continue;
       }
 

@@ -73,9 +73,11 @@ if(!isset($_REQUEST['submit'])) {
   }
 
   // Now we have the file scrubbed - read and put in DB
+  $participants = 0;
   $firstLine = true;
   if(($filehandle = fopen($new_file_location, 'r')) !== false) {
     while(($data = fgetcsv($filehandle,1000,';')) !== false) {
+      $participants += 1;
       /*
       * This is the indiviual row
       * [0] => Navn
@@ -117,6 +119,7 @@ if(!isset($_REQUEST['submit'])) {
       $db->query($sql,$values);
     }
     fclose($filehandle);
+    echo $participants . " pirater tilføjet til databasen.";
   }
 }
 include("footer.php");

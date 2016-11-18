@@ -42,7 +42,7 @@ class DB{
       die("No config file");
     }
     $config = new config;
-    $dsn = "mysql:dbname=" . $config->get_db() . ";host=" . $config->get_host() . ";charset=utf8_danish_ci";
+    $dsn = "mysql:dbname=" . $config->get_db() . ";host=" . $config->get_host() . ";charset=utf8mb4";
     $user = $config->get_user();
     $password = $config->get_pass();
 

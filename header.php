@@ -39,9 +39,9 @@ function echoActiveClassIfRequestMatches($requestUri)
           Upload CSV fil
         </a>
       </li>
-      <li <?php echo echoActiveClassIfRequestMatches("choose"); ?>>
-        <a href="<?php echo $teaminator_url . 'choose.php'; ?>" title="Har selv valgt hold">
-          Selv valgt hold
+      <li <?php echo echoActiveClassIfRequestMatches("showTeams"); ?>>
+        <a href="<?php echo $teaminator_url . 'showTeams.php'; ?>" title="Hold">
+          Hold
         </a>
       </li>
     </ul>

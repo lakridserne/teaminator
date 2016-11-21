@@ -1,0 +1,30 @@
+<?php
+/**
+* Coding Pirates Teaminator
+* Used to generate teams at Coding Pirates Game Jam 2015-2016
+*/
+
+include("dbConnect.php");
+$db = new DB;
+include("header.php");
+
+// see if form was already submitted
+if(!isset($_REQUEST['submit'])) {
+  // Form not submitted yet
+  // Fetch names
+  $sql = "SELECT participants.name, team.team_ID FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE teaminated=0";
+  $names = $db->query($sql);
+  ?>
+  <pre class="prettyprint">var names = $('select[name="names_teams[]0"]').bootstrapDualListbox();</pre>
+  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <select multiple="multiple" size="10" name="names_teams[]">
+      <?php
+      foreach ($names as $name) {
+        echo "<option value=" . $name['participants.name'] . if(isset($name['team.team_ID'])) { echo " selected='selected'"; } . ">" . $name['participants.name'] . "</option>";
+      }
+      ?>
+    </select>
+  </form>
+  <?php
+}
+?>

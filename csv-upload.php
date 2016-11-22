@@ -4,7 +4,6 @@
 * Used to generate teams at Coding Pirates Game Jam 2015-2016
 */
 
-include("dbConnect.php");
 include("header.php");
 
 if(!isset($_REQUEST['submit'])) {
@@ -97,7 +96,6 @@ if(!isset($_REQUEST['submit'])) {
       }
 
       // Now make connection to the database and import data
-      $db = new DB;
       $sql = "INSERT INTO participants (name,age,parentemail,childemail,
                           parentphone,childphone,visualprog,textprog,
                           graphic,updated_since_csv,teaminated)

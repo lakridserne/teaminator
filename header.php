@@ -1,5 +1,17 @@
 <?php
 $teaminator_url = "https://www.rathhansen.com/teaminator/";
+include_once("dbConnect.php");
+$db = new DB;
+session_start();
+if(isset($_SESSION['login_ID'])) {
+  $user_sql = "SELECT login_hash FROM users WHERE ID=:ID";
+  $user_val = [[":ID",$_SESSION['login_ID']]];
+  $login_hash = $db->query($user_sql,$user_val);
+} else {
+  if($_SERVER['PHP_SELF'] != $teaminator_url . "login.php") {
+    header("Location: login.php");
+  }
+}
 
 function echoActiveClassIfRequestMatches($requestUri)
 {

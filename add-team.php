@@ -15,8 +15,7 @@ if(!isset($_REQUEST['submit'])) {
   $sql = "SELECT name FROM participants WHERE teaminated=0";
   $names = $db->query($sql);
   ?>
-  <script>var names = $('select[name="names_teams[]0"]').bootstrapDualListbox();</script>
-  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+  <form class="names" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <select multiple="multiple" size="10" name="names_teams[]">
       <?php
       foreach ($names as $name) {
@@ -25,6 +24,7 @@ if(!isset($_REQUEST['submit'])) {
       ?>
     </select>
   </form>
+  <script>var names = $('.names').bootstrapDualListbox();</script>
   <?php
 }
 ?>

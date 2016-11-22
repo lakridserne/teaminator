@@ -38,8 +38,8 @@ if(!isset($_REQUEST['submit'])) {
     } else {
       $sql = "INSERT INTO team (team_ID, participants_ID) VALUES (:team_ID, :participants_ID)";
       $nNames = count($names);
-      $sql = "SELECT team_ID FROM team ORDER BY team_ID DESC LIMIT 1";
-      $nextid = $db->query($sql);
+      $next_ID_sql = "SELECT team_ID FROM team ORDER BY team_ID DESC LIMIT 1";
+      $nextid = $db->query($next_ID_sql);
       $next_team_ID = $nextid['0']["team_ID"] + 1;
 
       for($i=0;$i < $nNames;$i++) {

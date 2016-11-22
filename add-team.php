@@ -41,13 +41,16 @@ if(!isset($_REQUEST['submit'])) {
       $next_ID_sql = "SELECT team_ID FROM team ORDER BY team_ID DESC LIMIT 1";
       $nextid = $db->query($next_ID_sql);
       $next_team_ID = $nextid['0']["team_ID"] + 1;
+      $update_sql = "UPDATE participants SET teaminated=1 WHERE ID=:ID";
 
       for($i=0;$i < $nNames;$i++) {
+        $update_value = [[":ID",$names[$i]]];
         $values = [
           [":team_ID",$next_team_ID],
           [":participants_ID",$names[$i]]
         ];
         $db->query($sql,$values);
+        $db->query($update_sql,$update_value);
       }
       echo "Hold " . $next_team_ID . " tilføjet med " . $nNames . " deltagere.";
     }

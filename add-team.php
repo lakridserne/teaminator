@@ -20,7 +20,7 @@ if(!isset($_REQUEST['submit'])) {
     <select multiple="multiple" size="10" name="names_teams[]">
       <?php
       foreach ($names as $name) {
-        echo "<option value=\"" . $name['name']  . \"">" . $name['name'] . "</option>";
+        echo "<option value=\"" . $name['name']  . "\">" . $name['name'] . "</option>";
       }
       ?>
     </select>

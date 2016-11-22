@@ -12,7 +12,7 @@ include("header.php");
 if(!isset($_REQUEST['submit'])) {
   // Form not submitted yet
   // Fetch names
-  $sql = "SELECT participants.name, team.team_ID FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE teaminated=0";
+  $sql = "SELECT name FROM participants WHERE teaminated=0";
   $names = $db->query($sql);
   ?>
   <pre class="prettyprint">var names = $('select[name="names_teams[]0"]').bootstrapDualListbox();</pre>
@@ -20,7 +20,7 @@ if(!isset($_REQUEST['submit'])) {
     <select multiple="multiple" size="10" name="names_teams[]">
       <?php
       foreach ($names as $name) {
-        echo "<option value=" . $name['participants.name'] . if(isset($name['team.team_ID'])) { echo " selected='selected'"; } . ">" . $name['participants.name'] . "</option>";
+        echo "<option value=" . $name['participants.name']  . ">" . $name['participants.name'] . "</option>";
       }
       ?>
     </select>

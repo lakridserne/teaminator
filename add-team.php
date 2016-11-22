@@ -54,4 +54,5 @@ if(!isset($_REQUEST['submit'])) {
     }
   }
 }
+include("footer.php");
 ?>

@@ -23,8 +23,25 @@ if(!isset($_REQUEST['submit'])) {
       }
       ?>
     </select>
+    <br />
+    <button type="submit" class="btn btn-default btn-block">Tilføj hold</button>
   </form>
-  <script>var names = $('.names').bootstrapDualListbox();</script>
+  <script>var names = $('.names').bootstrapDualListbox({moveOnSelect:false});</script>
   <?php
+} else {
+  // Okay submitted - get selected team members
+  if(isset($_REQUEST['names_teams'])) {
+    $names = $_REQUEST['names_teams'];
+
+    if(!isset($names)) {
+      die("Du har ikke valgt nogen holddeltagere.");
+    } else {
+      $nNames = count($names);
+
+      for($i=0;$i < $nNames;$i++) {
+        echo $names[$i] . "<br />";
+      }
+    }
+  }
 }
 ?>

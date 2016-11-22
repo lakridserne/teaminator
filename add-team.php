@@ -49,6 +49,7 @@ if(!isset($_REQUEST['submit'])) {
         ];
         $db->query($sql,$values);
       }
+      echo "Hold " . $next_team_ID . " tilføjet med " . $nNames . " deltagere.";
     }
   }
 }

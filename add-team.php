@@ -36,11 +36,15 @@ if(!isset($_REQUEST['submit'])) {
     if(!isset($names)) {
       die("Du har ikke valgt nogen holddeltagere.");
     } else {
-      $sql = "INSERT INTO team (participants_ID) VALUES (:participants_ID)";
+      $sql = "INSERT INTO team (team_ID, participants_ID) VALUES (:team_ID, :participants_ID)";
       $nNames = count($names);
+      $sql = "SELECT team_ID FROM team ORDER BY team_ID DESC LIMIT 1";
+      $nextid = $this->db->query($sql);
+      $next_team_ID = $nextid['0']["team_ID"] + 1;
 
       for($i=0;$i < $nNames;$i++) {
         $values = [
+          [":team_ID",$next_team_ID],
           [":participants_ID",$names[$i]]
         ];
         $db->query($sql,$values);

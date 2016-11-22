@@ -40,7 +40,10 @@ if(!isset($_REQUEST['submit'])) {
       $nNames = count($names);
 
       for($i=0;$i < $nNames;$i++) {
-        $db->query($sql,$names[$i]);
+        $values = [
+          [":participants_ID",$names[$i]]
+        ];
+        $db->query($sql,$values);
       }
     }
   }

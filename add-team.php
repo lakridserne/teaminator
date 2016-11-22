@@ -36,10 +36,11 @@ if(!isset($_REQUEST['submit'])) {
     if(!isset($names)) {
       die("Du har ikke valgt nogen holddeltagere.");
     } else {
+      $sql = "INSERT INTO team (participants_ID) VALUES (:participants_ID)";
       $nNames = count($names);
 
       for($i=0;$i < $nNames;$i++) {
-        echo $names[$i] . "<br />";
+        $db->query($sql,$names[$i]);
       }
     }
   }

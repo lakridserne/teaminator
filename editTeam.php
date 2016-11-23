@@ -36,7 +36,7 @@ if(!isset($_REQUEST['submit'])) {
       ?>
     </select>
     <br />
-    <button name="submit" type="submit" class="btn btn-default btn-block">Tilføj hold</button>
+    <button name="submit" type="submit" class="btn btn-default btn-block">Ret hold</button>
   </form>
   <script>var names = $('.names').bootstrapDualListbox({moveOnSelect:false});</script>
   <?php
@@ -48,17 +48,28 @@ if(!isset($_REQUEST['submit'])) {
     if(!isset($names)) {
       die("Du har ikke valgt nogen holddeltagere.");
     } else {
-      $sql = "INSERT INTO team (team_ID, participants_ID) VALUES (:team_ID, :participants_ID)";
-      $nNames = count($names);
-      $next_ID_sql = "SELECT team_ID FROM team ORDER BY team_ID DESC LIMIT 1";
-      $nextid = $db->query($next_ID_sql);
-      $next_team_ID = $nextid['0']["team_ID"] + 1;
-      $update_sql = "UPDATE participants SET teaminated=1 WHERE ID=:ID";
+      // we need to know who's already in the team so we can correct
+      $selected_sql = "SELECT participants.ID, participants.name FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE team_ID=:team_ID";
+      $selected_val = [[":team_ID",$team]];
+      $team_participants = $db->query($selected_sql,$selected_val);
 
+      $new_in_team_sql = "INSERT INTO team (team_ID, participants_ID) VALUES (:team_ID, :participants_ID)";
+      $nNames = count($names);
+      $update_sql = "UPDATE participants SET teaminated=1 WHERE ID=:ID";
+      $update_remove_sql = "UPDATE participants SET teaminated=0 WHERE ID=:ID";
+      $remove_sql = "DELETE FROM team WHERE participants_ID=:participants_ID";
+
+      foreach($team_participants as $participant) {
+        // Remove existing from DB
+        $update_value = [[":ID",$participant['ID']]];
+        $remove_value = [[":participants_ID",$participant['ID']]];
+        $db->query($update_remove_sql,$update_value);
+        $db->query($remove_sql,$remove_value);
+      }
       for($i=0;$i < $nNames;$i++) {
         $update_value = [[":ID",$names[$i]]];
         $values = [
-          [":team_ID",$next_team_ID],
+          [":team_ID",$_REQUEST['team']],
           [":participants_ID",$names[$i]]
         ];
         $db->query($sql,$values);

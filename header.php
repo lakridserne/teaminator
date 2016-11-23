@@ -20,7 +20,7 @@ if(isset($_SESSION['login_ID'])) {
   $set_token_sql = "UPDATE users SET login_hash=:login_hash WHERE ID=:ID";
   $set_token_values = [
     [":login_hash",$token],
-    [":ID",$_SESSION['login_user']]
+    [":ID",$_SESSION['login_ID']]
   ];
   $db->query($set_token_sql,$set_token_values);
 

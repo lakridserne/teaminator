@@ -10,10 +10,10 @@ if(isset($_SESSION['login_ID'])) {
 
   // Check hash and user from DB against session hash and user
   if($_SESSION['login_user'] != $login_hash[0]['user']) {
-    die("Login fejlet");
+    header("Location: " . $teaminator_url . "login.php");
   }
   if($_SESSION['login_hash'] != $login_hash[0]['login_hash']) {
-    die("Login fejlet");
+    header("Location: " . $teaminator_url . "login.php");
   }
 
   // Before sending the user on the way make sure to update hash

@@ -56,10 +56,10 @@ if(!isset($_REQUEST['submit'])) {
         // We're in - go to next page
         header("Location: " . $teaminator_url);
       } else {
-        die("Login fejlet");
+        header("Location: " . $teaminator_url . "login.php");
       }
     } else {
-      die("Login fejlet");
+      header("Location: " . $teaminator_url . "login.php");
     }
   }
 }

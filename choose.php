@@ -32,6 +32,11 @@ if(!isset($_REQUEST['submit'])) {
 
     <button type="submit" name="submit" class="btn btn-default btn-block">Opdater interesser</button>
   </form>
+  <script>
+    $(document).ready(function() {
+      $(".names_select").select2();
+    });
+  </script>
   <?php
 } else {
 

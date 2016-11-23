@@ -35,8 +35,32 @@ if(!isset($_REQUEST['submit'])) {
     $login_sql = "SELECT ID, pass, salt FROM users WHERE user=:username";
     $login_val = [[":username",$_REQUEST['username']]];
 
-    $pwd = $db->query($login_sql,$login_val);
-    print_r($pwd);
+    if($db->count($login_sql,$login_val) == 1) {
+      $pwd = $db->query($login_sql,$login_val);
+      $sec_pass = sha1($_REQUEST['password'] . $pwd[0]['salt']);
+      if($sec_pass == $pwd[0]['pass']) {
+        // We're in. Now generate a token for the user
+        $token = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1);
+        $set_token_sql = "UPDATE users SET login_hash=:login_hash WHERE ID=:ID";
+        $set_token_values = [
+          [":login_hash",$token],
+          [":ID",$pwd[0]['ID']]
+        ];
+        $db->query($set_token_sql,$set_token_values);
+
+        // Now update our session
+        $_SESSION['login_ID'] = $pwd[0]['ID'];
+        $_SESSION['login_user'] = $_REQUEST['username'];
+        $_SESSION['login_hash'] = $token;
+
+        // We're in - go to next page
+        header("Location: " . $teaminator_url);
+      } else {
+        die("Login fejlet");
+      }
+    } else {
+      die("Login fejlet");
+    }
   }
 }
 include("footer.php");

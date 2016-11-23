@@ -4,9 +4,28 @@ include_once("dbConnect.php");
 $db = new DB;
 session_start();
 if(isset($_SESSION['login_ID'])) {
-  $user_sql = "SELECT login_hash FROM users WHERE ID=:ID";
+  $user_sql = "SELECT user, login_hash FROM users WHERE ID=:ID";
   $user_val = [[":ID",$_SESSION['login_ID']]];
   $login_hash = $db->query($user_sql,$user_val);
+
+  // Check hash and user from DB against session hash and user
+  if($_SESSION['login_user'] != $login_hash[0]['user']) {
+    die("Login fejlet");
+  }
+  if($_SESSION['login_hash'] != $login_hash[0]['login_hash']) {
+    die("Login fejlet");
+  }
+
+  // Before sending the user on the way make sure to update hash
+  $token = substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 1).substr(md5(time()),1);
+  $set_token_sql = "UPDATE users SET login_hash=:login_hash WHERE ID=:ID";
+  $set_token_values = [
+    [":login_hash",$token],
+    [":ID",$_SESSION['login_user']]
+  ];
+  $db->query($set_token_sql,$set_token_values);
+
+  $_SESSION['login_hash'] = $token;
 } else {
   if("https://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] != $teaminator_url . "login.php") {
     header("Location: " . $teaminator_url . "login.php");

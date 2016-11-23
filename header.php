@@ -84,6 +84,11 @@ function echoActiveClassIfRequestMatches($requestUri)
           Tilføj hold
         </a>
       </li>
+      <li <?php echo echoActiveClassIfRequestMatches("choose"); ?>>
+        <a href="<?php echo $teaminator_url . 'choose.php'; ?>" title="Vælg interesser">
+          Vælg interesser
+        </a>
+      </li>
     </ul>
   </div>
 </nav>

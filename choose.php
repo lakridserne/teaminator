@@ -13,7 +13,7 @@ if(!isset($_REQUEST['submit'])) {
   $names = $db->query($fetch_names_sql);
   ?>
   <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" class="names">
-    <select class="names_select">
+    <select name="names_select" class="names_select">
       <?php
         foreach($names as $name) {
           echo "<option value='" . $name['ID'] . "'>" . $name['name'] . "</option>";

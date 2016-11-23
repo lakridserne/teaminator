@@ -20,6 +20,7 @@ if(!isset($_REQUEST['submit'])) {
         }
       ?>
     </select>
+    <br />
     <label for="visualprog">Visuel programmering</label>
     <input type="checkbox" name="visualprog" value="visualprog" /><br />
     <label for="textprog">Tekstprogrammering</label>

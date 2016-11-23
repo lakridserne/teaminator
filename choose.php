@@ -60,12 +60,13 @@ if(!isset($_REQUEST['submit'])) {
   } else {
     $ultra = false;
   }
-  $update_sql = "UPDATE participants SET visualprog=:visualprog, textprog=:textprog, graphic=:graphic, ultra=:ultra, updated_since_csv=1";
+  $update_sql = "UPDATE participants SET visualprog=:visualprog, textprog=:textprog, graphic=:graphic, ultra=:ultra, updated_since_csv=1 WHERE ID=:ID";
   $values = [
     [":visualprog",$visualprog],
     [":textprog",$textprog],
     [":graphic",$graphic],
-    [":ultra",$ultra]
+    [":ultra",$ultra],
+    [":ID",$_REQUEST['names_select']]
   ];
   $db->query($update_sql,$values);
 }

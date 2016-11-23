@@ -39,7 +39,35 @@ if(!isset($_REQUEST['submit'])) {
   </script>
   <?php
 } else {
-
+  // now find the data
+  if(isset($_REQUEST['visualprog'])) {
+    $visualprog = true;
+  } else {
+    $visualprog = false;
+  }
+  if(isset($_REQUEST['textprog'])) {
+    $textprog = true;
+  } else {
+    $textprog = false;
+  }
+  if(isset($_REQUEST['graphic'])) {
+    $graphic = true;
+  } else {
+    $graphic = false;
+  }
+  if(isset($_REQUEST['ultra'])) {
+    $ultra = true;
+  } else {
+    $ultra = false;
+  }
+  $update_sql = "UPDATE participants SET visualprog=:visualprog, textprog=:textprog, graphic=:graphic, ultra=:ultra, updated_since_csv=1";
+  $values = [
+    [":visualprog",$visualprog],
+    [":textprog",$textprog],
+    [":graphic",$graphic],
+    [":ultra",$ultra]
+  ];
+  $db->query($update_sql,$values);
 }
 
 include("footer.php");

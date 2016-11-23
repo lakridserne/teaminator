@@ -8,8 +8,8 @@ if(isset($_SESSION['login_ID'])) {
   $user_val = [[":ID",$_SESSION['login_ID']]];
   $login_hash = $db->query($user_sql,$user_val);
 } else {
-  if($_SERVER['PHP_SELF'] != $teaminator_url . "login.php") {
-    header("Location: login.php");
+  if("https://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] != $teaminator_url . "login.php") {
+    header("Location: " . $teaminator_url . "login.php");
   }
 }
 

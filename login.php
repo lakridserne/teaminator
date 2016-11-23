@@ -5,23 +5,20 @@
 */
 
 include("header.php");
+if(!isset($_REQUEST['submit'])) {
 ?>
 
 <div class="row">
   <div class="col-md-4"></div>
   <div class="col-md-4">
-    <form class="form-horizontal" name="loginForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <form name="loginForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
       <div class="form-group">
-        <label class="control-label col-sm-2" for="username">Brugernavn</label>
-        <div class="col-sm-10 pull-right">
-          <input type="text" name="username" id="username" />
-        </div>
+        <label for="username">Brugernavn</label>
+        <input type="text" name="username" id="username" />
       </div>
       <div class="form-group">
-        <label class="control-label col-sm-2" for="username">Kodeord</label>
-        <div class="col-sm-10 pull-right">
-          <input type="password" name="password" id="password" />
-        </div>
+        <label for="username">Kodeord</label>
+        <input type="password" name="password" id="password" />
       </div>
       <br />
       <button name="submit" type="submit" class="btn btn-default btn-block">Log ind</button>
@@ -31,5 +28,8 @@ include("header.php");
 </div>
 
 <?php
+} else {
+  // login logic
+}
 include("footer.php");
 ?>

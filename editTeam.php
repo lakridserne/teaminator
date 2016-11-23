@@ -72,7 +72,7 @@ if(!isset($_REQUEST['submit'])) {
           [":team_ID",$_REQUEST['team']],
           [":participants_ID",$names[$i]]
         ];
-        $db->query($sql,$values);
+        $db->query($new_in_team_sql,$values);
         $db->query($update_sql,$update_value);
       }
       echo "Hold " . $next_team_ID . " tilføjet med " . $nNames . " deltagere.";

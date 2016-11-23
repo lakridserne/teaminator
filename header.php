@@ -9,11 +9,10 @@ if(isset($_SESSION['login_ID'])) {
   $login_hash = $db->query($user_sql,$user_val);
 
   // Check hash and user from DB against session hash and user
-  if($_SESSION['login_user'] != $login_hash[0]['user']) {
-    header("Location: " . $teaminator_url . "login.php");
-  }
-  if($_SESSION['login_hash'] != $login_hash[0]['login_hash']) {
-    header("Location: " . $teaminator_url . "login.php");
+  if($_SESSION['login_user'] != $login_hash[0]['user'] || $_SESSION['login_hash'] != $login_hash[0]['login_hash']) {
+    if("https://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] != $teaminator_url . "login.php") {
+      header("Location: " . $teaminator_url . "login.php");
+    }
   }
 
   // Before sending the user on the way make sure to update hash

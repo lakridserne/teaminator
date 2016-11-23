@@ -13,13 +13,13 @@ include("header.php");
     <form class="form-horizontal" name="loginForm" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
       <div class="form-group">
         <label class="control-label col-sm-2" for="username">Brugernavn</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10 pull-right">
           <input type="text" name="username" id="username" />
         </div>
       </div>
       <div class="form-group">
         <label class="control-label col-sm-2" for="username">Kodeord</label>
-        <div class="col-sm-10">
+        <div class="col-sm-10 pull-right">
           <input type="password" name="password" id="password" />
         </div>
       </div>

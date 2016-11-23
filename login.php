@@ -32,7 +32,7 @@ if(!isset($_REQUEST['submit'])) {
   // login logic
   if(isset($_REQUEST['username']) && isset($_REQUEST['password'])) {
     // both user and pass set - let's check it!
-    $login_sql = "SELECT ID, password, salt FROM users WHERE username=:username";
+    $login_sql = "SELECT ID, pass, salt FROM users WHERE user=:username";
     $login_val = [[":username",$_REQUEST['username']]];
 
     $pwd = $db->query($login_sql,$login_val);

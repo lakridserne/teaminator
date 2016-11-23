@@ -75,7 +75,7 @@ if(!isset($_REQUEST['submit'])) {
         $db->query($new_in_team_sql,$values);
         $db->query($update_sql,$update_value);
       }
-      echo "Hold " . $next_team_ID . " tilføjet med " . $nNames . " deltagere.";
+      echo "Hold " . $_REQUEST['team'] . " ændret og har nu " . $nNames . " deltagere.";
     }
   }
 }

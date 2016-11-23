@@ -11,7 +11,8 @@ $number_teams = "SELECT team_ID FROM team ORDER BY team_ID DESC LIMIT 1";
 $number_teams_result = $db->count($number_teams);
 
 for($i=1;$i<=$number_teams_result;$i++) {
-  ?><h3>Hold <?php echo $i; ?></h3><?php
+  ?><h3>Hold <?php echo $i; ?></h3><br />
+  <a href="<?php echo $teaminator_url . 'editTeam.php?team=' . $i; ?>" title="Ret hold <?php echo $i; ?>">Ret</a><?php
   $find_team_members = "SELECT * FROM team WHERE team_ID=:team_ID";
   $values = [
     [":team_ID",$i]

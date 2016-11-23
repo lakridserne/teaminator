@@ -19,16 +19,19 @@ if(!isset($_REQUEST['submit'])) {
   // Fetch names
   $sql = "SELECT ID, name FROM participants WHERE teaminated=0";
   $names = $db->query($sql);
-  $selected_sql = "SELECT participants.ID, participants.name, team.team_ID FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE team_ID=:team_ID";
+  $selected_sql = "SELECT participants.ID, participants.name FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE team_ID=:team_ID";
   $selected_val = [[":team_ID",$team]];
   $team_participants = $db->query($selected_sql,$selected_val);
-  print_r($team_participants);
   ?>
   <form class="names" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+    <input type="hidden" name="team" value="<?php echo $team; ?>" />
     <select multiple="multiple" size="10" name="names_teams[]">
       <?php
       foreach ($names as $name) {
         echo "<option value=\"" . $name['ID']  . "\">" . $name['name'] . "</option>";
+      }
+      foreach($team_participants as $participant) {
+        echo "<option selected='selected' value=\"" . $participant['ID'] . "\">" . $participant['name'] . "</option>";
       }
       ?>
     </select>

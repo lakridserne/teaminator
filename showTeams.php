@@ -7,8 +7,8 @@
 include("header.php");
 
 // Get teams and show them
-$number_teams = "SELECT team_ID FROM team ORDER BY team_ID DESC LIMIT 1";
-$number_teams_result = $db->count($number_teams);
+$number_teams = "SELECT COUNT(DISTINCT team_ID) FROM team";
+$number_teams_result = $db->query($number_teams);
 
 for($i=1;$i<=$number_teams_result;$i++) {
   ?><h3>Hold <?php echo $i; ?></h3><a href="<?php echo $teaminator_url . 'editTeam.php?team=' . $i; ?>" title="Ret hold <?php echo $i; ?>">Ret</a>

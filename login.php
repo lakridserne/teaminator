@@ -29,6 +29,7 @@ include("header.php");
 
 <?php
 } else {
+  $teaminator_url = "https://www.rathhansen.com/teaminator/";
   include_once("dbConnect.php");
   $db = new DB;
   session_start();

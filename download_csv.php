@@ -37,6 +37,9 @@ if(isset($_SESSION['login_ID'])) {
 }
 
 // good - all logged in - let's create CSV file
+if(file_exists('hold.csv')) {
+  unlink('hold.csv');
+}
 $file = fopen("hold.csv","w");
 
 $team_sql = "SELECT participants.name, participants.age,team.team_ID,participants.visualprog,participants.textprog,participants.graphic,participants.ultra FROM participants INNER JOIN team ON participants.ID=team.participants_ID ORDER BY team.team_ID,participants.name";
@@ -49,6 +52,7 @@ $headings['textprog'] = "Tekstprogrammering";
 $headings['graphic'] = "Grafik";
 $headings['ultra'] = "Ultra";
 fputcsv($file,$headings, ';', '"');
+$teams = array_unique($teams);
 foreach($teams as $team) {
   fputcsv($file,$team, ';', '"');
 }

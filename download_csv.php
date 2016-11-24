@@ -41,5 +41,24 @@ $file = fopen("hold.csv","w");
 
 $team_sql = "SELECT participants.name, participants.age,team.team_ID,participants.visualprog,participants.textprog,participants.graphic,participants.ultra FROM participants INNER JOIN team ON participants.ID=team.participants_ID ORDER BY team.team_ID,participants.name";
 $teams = $db->query($team_sql);
-print_r($teams);
+fputcsv($file,explode(';','Navn'));
+fputcsv($file,explode(';','Alder'));
+fputcsv($file,explode(';','Holdnummer'));
+fputcsv($file,explode(';','Visuel programmering'));
+fputcsv($file,explode(';','Tekstprogrammering'));
+fputcsv($file,explode(';','Grafik'));
+fputcsv($file,explode(';','Ultra'));
+foreach($teams as $team) {
+  fputcsv($file,explode(';',$team['name']));
+  fputcsv($file,explode(';',$team['age']));
+  fputcsv($file,explode(';',$team['team_ID']));
+  fputcsv($file,explode(';',$team['visualprog']));
+  fputcsv($file,explode(';',$team['textprog']));
+  fputcsv($file,explode(';',$team['graphic']));
+  fputcsv($file,explode(';',$team['ultra']));
+}
+
+fclose($file);
+header("Location: hold.csv");
+header("Location: index.php");
 ?>

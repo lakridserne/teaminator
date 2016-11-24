@@ -35,11 +35,11 @@ if(isset($_REQUEST['submit'])) {
 <div class="col-md-4">
   <h2>Aldersoversigt</h2>
   <?php
-  $sql_gen = "SELECT * FROM participants WHERE age=:age";
-  $sql_vis = "SELECT * FROM participants WHERE age=:age AND visualprog=1";
-  $sql_tex = "SELECT * FROM participants WHERE age=:age AND textprog=1";
-  $sql_des = "SELECT * FROM participants WHERE age=:age AND graphic=1";
-  $sql_ultra = "SELECT * FROM participants WHERE age=:age AND ultra=1";
+  $sql_gen = "SELECT * FROM participants WHERE teaminated=0 AND updated_since_csv=1 AND age=:age";
+  $sql_vis = "SELECT * FROM participants WHERE teaminated=0 AND updated_since_csv=1 AND age=:age AND visualprog=1";
+  $sql_tex = "SELECT * FROM participants WHERE teaminated=0 AND updated_since_csv=1 AND age=:age AND textprog=1";
+  $sql_des = "SELECT * FROM participants WHERE teaminated=0 AND updated_since_csv=1 AND age=:age AND graphic=1";
+  $sql_ultra = "SELECT * FROM participants WHERE teaminated=0 AND updated_since_csv=1 AND age=:age AND ultra=1";
   for($i=7;$i<=17;$i++) {
     $sql_val = [[":age",$i]];
     echo "<b>" . $i . " år</b><br />";

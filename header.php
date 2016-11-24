@@ -89,6 +89,11 @@ function echoActiveClassIfRequestMatches($requestUri)
           Vælg interesser
         </a>
       </li>
+      <li <?php echo echoActiveClassIfRequestMatches("genteams"); ?>>
+        <a href="<?php echo $teaminator_url . 'genteams.php'; ?>" title="Generer teams">
+          Generer teams
+        </a>
+      </li>
     </ul>
   </div>
 </nav>

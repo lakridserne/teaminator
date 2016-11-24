@@ -3,22 +3,17 @@
 * Coding Pirates Teaminator
 * Used to generate teams at Coding Pirates Game Jam 2015-2016
 */
-include("dbConnect.php");
-$db = new DB;
-?>
-<!DOCTYPE html>
-<head>
-  <title>Coding Pirates Team-inator</title>
-</head>
-<h1>Coding Pirates Team-inator til Coding Pirates Game Jam 2015!</h1>
-<h2>Teams</h2>
-<?php
-// Get teams and show them
-$number_teams = "SELECT team_ID FROM team ORDER BY team_ID DESC LIMIT 1";
-$number_teams_result = $db->count($number_teams);
 
-for($i=1;$i<=$number_teams_result;$i++) {
-  ?><h3>Hold <?php echo $i; ?></h3><?php
+include("header.php");
+
+// Get teams and show them
+$number_teams = "SELECT COUNT(DISTINCT team_ID) FROM team";
+$number_teams_result = $db->query($number_teams);
+
+for($i=1;$i<=$number_teams_result[0][0];$i++) {
+  ?><h3>Hold <?php echo $i; ?></h3><a href="<?php echo $teaminator_url . 'editTeam.php?team=' . $i; ?>" title="Ret hold <?php echo $i; ?>">Ret</a>
+  <br />
+  <?php
   $find_team_members = "SELECT * FROM team WHERE team_ID=:team_ID";
   $values = [
     [":team_ID",$i]
@@ -36,4 +31,5 @@ for($i=1;$i<=$number_teams_result;$i++) {
   }
   echo "<br /><br />";
 }
+include("footer.php");
 ?>

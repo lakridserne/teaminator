@@ -3,14 +3,12 @@
 * Coding Pirates Teaminator
 * Used to generate teams at Coding Pirates Game Jam 2015-2016
 */
-include("dbConnect.php");
-$db = new DB;
 
 if(isset($_REQUEST['submit'])) {
   // Form already filled out
   $sql = "INSERT INTO participants
-    (name,age,visualprog,textprog,graphic,teaminated)
-    VALUES (:name, :age, :visualprog, :textprog, :graphic, false)";
+    (name,age,visualprog,textprog,graphic,updated_since_csv,teaminated)
+    VALUES (:name, :age, :visualprog, :textprog, :graphic, true, false)";
 
   // if statements determining whether the interests should be true or false
   if(isset($_REQUEST['visualprog'])) {
@@ -41,12 +39,9 @@ if(isset($_REQUEST['submit'])) {
   ];
   $db->query($sql,$values);
 }
+include("header.php");
 ?>
-<!DOCTYPE html>
-<head>
-  <title>Coding Pirates Team-inator</title>
-</head>
-<h1>Coding Pirates Team-inator til Coding Pirates Game Jam 2015!</h1>
+<h2>KUN hvis du har brug for at tilføje en person manuelt af en eller anden grund. Ellers brug CSV upload!</h2>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
   Navn: <input type="text" name="name" /><br />
   Alder <input type="number" name="age" /><br />
@@ -57,3 +52,6 @@ if(isset($_REQUEST['submit'])) {
 
   <input type="submit" name="submit" value="Bliv Team-inated!" />
 </form>
+<?php
+include("footer.php");
+?>

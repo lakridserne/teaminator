@@ -4,8 +4,8 @@
 * Used to generate teams at Coding Pirates Game Jam 2015-2016
 */
 
-include("header.php");
 if(!isset($_REQUEST['submit'])) {
+include("header.php");
 ?>
 
 <div class="row">
@@ -29,6 +29,8 @@ if(!isset($_REQUEST['submit'])) {
 
 <?php
 } else {
+  include_once("dbConnect.php");
+  $db = new DB;
   // login logic
   if(isset($_REQUEST['username']) && isset($_REQUEST['password'])) {
     // both user and pass set - let's check it!

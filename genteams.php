@@ -6,6 +6,7 @@
 
 include("header.php");
 ?>
+<div class="col-md-4">
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
 Antal: <input type="number" name="teamsize" /><br />
 Mindst alder: <input type="number" name="minage" /><br />
@@ -28,5 +29,10 @@ if(isset($_REQUEST['submit'])) {
   </pre>
   <?php
 }
+?>
+</div>
+<div class="col-md-4"></div>
+<div class="col-md-4">d</div>
+<?php
 include("footer.php");
 ?>

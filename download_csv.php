@@ -39,7 +39,7 @@ if(isset($_SESSION['login_ID'])) {
 // good - all logged in - let's create CSV file
 $file = fopen("hold.csv","w");
 
-$team_sql = "SELECT participants.name, participants.age,team.team_ID FROM participants INNER JOIN team ON participants.ID=team.participants_ID ORDER BY team.team_ID,participants.name";
+$team_sql = "SELECT participants.name, participants.age,team.team_ID,participants.visualprog,participants.textprog,participants.graphic,participants.ultra FROM participants INNER JOIN team ON participants.ID=team.participants_ID ORDER BY team.team_ID,participants.name";
 $teams = $db->query($team_sql);
 print_r($teams);
 ?>

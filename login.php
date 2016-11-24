@@ -31,6 +31,7 @@ include("header.php");
 } else {
   include_once("dbConnect.php");
   $db = new DB;
+  session_start();
   // login logic
   if(isset($_REQUEST['username']) && isset($_REQUEST['password'])) {
     // both user and pass set - let's check it!

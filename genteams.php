@@ -32,7 +32,25 @@ if(isset($_REQUEST['submit'])) {
 ?>
 </div>
 <div class="col-md-4"></div>
-<div class="col-md-4">d</div>
+<div class="col-md-4">
+  <h2>Aldersoversigt</h2>
+  <?php
+  $sql_gen = "SELECT * FROM participants WHERE age=:age";
+  $sql_vis = "SELECT * FROM participants WHERE age=:age AND visualprog=1";
+  $sql_tex = "SELECT * FROM participants WHERE age=:age AND textprog=1";
+  $sql_des = "SELECT * FROM participants WHERE age=:age AND graphic=1";
+  $sql_ultra = "SELECT * FROM participants WHERE age=:age AND ultra=1";
+  for($i=7;$i<=17;$i++) {
+    $sql_val = [[":age",$i]];
+    echo "<b>" . $i . " år</b><br />";
+    echo $db->count($sql_gen,$sql_val) . " i alt<br />";
+    echo $db->count($sql_vis,$sql_val) . " visuelle<br />";
+    echo $db->count($sql_tex,$sql_val) . " tekst<br />";
+    echo $db->count($sql_des,$sql_val) . " designere<br />";
+    echo $db->count($sql_ultra,$sql_val) . " ultra<br />";
+  }
+  ?>
+</div>
 <?php
 include("footer.php");
 ?>

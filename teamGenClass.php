@@ -27,12 +27,11 @@ class teamGen {
     $numresults = count($possibleCandidates);
     if($numresults >= $amount) {
       // Yay! Enough! Go ahead and pull the list of candidates from the DB
-      $sortedResult = $this->sortInterests($possibleCandidates,$designers,$visualtext,$ultra,$amount,$numresults);
+      $sortedResult = $this->sortInterests($possibleCandidates,$designers,$visualtext,$amount,$numresults);
       // Put people in DB
       $sql = "SELECT team_ID FROM team ORDER BY team_ID DESC LIMIT 1";
       $nextid = $this->db->query($sql);
       $next_team_ID = $nextid['0']["team_ID"] + 1;
-      print_r($sortedResult);
       $sql = "INSERT INTO team (team_ID,participants_ID) VALUES (:team_ID, :participants_ID)";
       $fetch_name = "SELECT name FROM participants WHERE ID=:id";
       $update_teaminate = "UPDATE participants SET teaminated=1 WHERE ID=:id";

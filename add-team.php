@@ -10,14 +10,14 @@ include("header.php");
 if(!isset($_REQUEST['submit'])) {
   // Form not submitted yet
   // Fetch names
-  $sql = "SELECT ID, name FROM participants WHERE teaminated=0";
+  $sql = "SELECT ID, name, age FROM participants WHERE teaminated=0";
   $names = $db->query($sql);
   ?>
   <form class="names" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     <select multiple="multiple" size="10" name="names_teams[]">
       <?php
       foreach ($names as $name) {
-        echo "<option value=\"" . $name['ID']  . "\">" . $name['name'] . "</option>";
+        echo "<option value=\"" . $name['ID']  . "\">" . $name['name'] . " - " . $name['age'] . " år" . "</option>";
       }
       ?>
     </select>

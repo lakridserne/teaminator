@@ -17,9 +17,9 @@ if(!isset($_REQUEST['team'])) {
 if(!isset($_REQUEST['submit'])) {
   // Form not submitted yet
   // Fetch names
-  $sql = "SELECT ID, name FROM participants WHERE teaminated=0";
+  $sql = "SELECT ID, name, age FROM participants WHERE teaminated=0";
   $names = $db->query($sql);
-  $selected_sql = "SELECT participants.ID, participants.name FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE team_ID=:team_ID";
+  $selected_sql = "SELECT participants.ID, participants.name, participants.age FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE team_ID=:team_ID";
   $selected_val = [[":team_ID",$team]];
   $team_participants = $db->query($selected_sql,$selected_val);
   ?>
@@ -28,10 +28,10 @@ if(!isset($_REQUEST['submit'])) {
     <select multiple="multiple" size="10" name="names_teams[]">
       <?php
       foreach ($names as $name) {
-        echo "<option value=\"" . $name['ID']  . "\">" . $name['name'] . "</option>";
+        echo "<option value=\"" . $name['ID']  . "\">" . $name['name'] . " - " . $name['age'] . " år" . "</option>";
       }
       foreach($team_participants as $participant) {
-        echo "<option selected='selected' value=\"" . $participant['ID'] . "\">" . $participant['name'] . "</option>";
+        echo "<option selected='selected' value=\"" . $participant['ID'] . "\">" . $participant['name'] . " - " . $participant['age'] . " år" . "</option>";
       }
       ?>
     </select>

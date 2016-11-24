@@ -96,19 +96,13 @@ if(!isset($_REQUEST['submit'])) {
       }
 
       // Now make connection to the database and import data
-      $sql = "INSERT INTO participants (name,age,parentemail,childemail,
-                          parentphone,childphone,visualprog,textprog,
+      $sql = "INSERT INTO participants (name,age,visualprog,textprog,
                           graphic,updated_since_csv,teaminated)
-                      VALUES (:name,:age,:parentemail,:childemail,:parentphone,
-                        :childphone,:visualprog,:textprog,:graphic,
+                      VALUES (:name,:age,:visualprog,:textprog,:graphic,
                         :updated_since_csv,:teaminated)";
       $values = [
         [":name",$data[0]],
         [":age",$data[1]],
-        [":parentemail",$data[6]],
-        [":childemail",$data[4]],
-        [":parentphone",$data[5]],
-        [":childphone",$data[3]],
         [":visualprog",0],
         [":textprog",0],
         [":graphic",0],

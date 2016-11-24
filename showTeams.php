@@ -5,7 +5,9 @@
 */
 
 include("header.php");
-
+?>
+<a href="<?php echo $teaminator_url . 'download_csv.php'; ?>" title="Download CSV">Download CSV</a>
+<?php
 // Get teams and show them
 $number_teams = "SELECT COUNT(DISTINCT team_ID) FROM team";
 $number_teams_result = $db->query($number_teams);

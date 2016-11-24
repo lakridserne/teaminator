@@ -60,5 +60,4 @@ foreach($teams as $team) {
 
 fclose($file);
 header("Location: hold.csv");
-header("Location: index.php");
 ?>

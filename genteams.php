@@ -42,12 +42,14 @@ if(isset($_REQUEST['submit'])) {
   $sql_ultra = "SELECT * FROM participants WHERE teaminated=0 AND updated_since_csv=1 AND age=:age AND ultra=1";
   for($i=7;$i<=17;$i++) {
     $sql_val = [[":age",$i]];
-    echo "<b>" . $i . " år</b><br />";
-    echo $db->count($sql_gen,$sql_val) . " i alt<br />";
-    echo $db->count($sql_vis,$sql_val) . " visuelle<br />";
-    echo $db->count($sql_tex,$sql_val) . " tekst<br />";
-    echo $db->count($sql_des,$sql_val) . " designere<br />";
-    echo $db->count($sql_ultra,$sql_val) . " ultra<br />";
+    if($db->count($sql_gen,$sql_val) > 0) {
+      echo "<b>" . $i . " år</b><br />";
+      echo $db->count($sql_gen,$sql_val) . " i alt<br />";
+      echo $db->count($sql_vis,$sql_val) . " visuelle<br />";
+      echo $db->count($sql_tex,$sql_val) . " tekst<br />";
+      echo $db->count($sql_des,$sql_val) . " designere<br />";
+      echo $db->count($sql_ultra,$sql_val) . " ultra<br />";
+    }
   }
   ?>
 </div>

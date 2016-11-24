@@ -48,9 +48,9 @@ $headings['visualprog'] = "Visuel programmering";
 $headings['textprog'] = "Tekstprogrammering";
 $headings['graphic'] = "Grafik";
 $headings['ultra'] = "Ultra";
-fputcsv($file,array_values($headings), ';', ' ');
+fputcsv($file,$headings, ';', '"');
 foreach($teams as $team) {
-  fputcsv($file,array_values($team), ';', ' ');
+  fputcsv($file,$team, ';', '"');
 }
 
 fclose($file);

@@ -52,8 +52,8 @@ $headings['textprog'] = "Tekstprogrammering";
 $headings['graphic'] = "Grafik";
 $headings['ultra'] = "Ultra";
 fputcsv($file,$headings, ';', '"');
-$teams = array_unique($teams);
 foreach($teams as $team) {
+  $team = array_unique($team);
   fputcsv($file,$team, ';', '"');
 }
 

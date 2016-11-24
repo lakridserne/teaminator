@@ -32,8 +32,7 @@ class teamGen {
       $sql = "SELECT team_ID FROM team ORDER BY team_ID DESC LIMIT 1";
       $nextid = $this->db->query($sql);
       $next_team_ID = $nextid['0']["team_ID"] + 1;
-      print_r($nextid);
-      echo $next_team_ID;
+      print_r($sortedResult);
       $sql = "INSERT INTO team (team_ID,participants_ID) VALUES (:team_ID, :participants_ID)";
       $fetch_name = "SELECT name FROM participants WHERE ID=:id";
       $update_teaminate = "UPDATE participants SET teaminated=1 WHERE ID=:id";

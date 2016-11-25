@@ -36,13 +36,14 @@ class teamGen {
         $nextid = $this->db->query($sql);
         $next_team_ID = $nextid['0']["team_ID"] + 1;
       }
-      $sql = "INSERT INTO team (team_ID,participants_ID) VALUES (:team_ID, :participants_ID)";
+      $sql = "INSERT INTO team (team_ID,participants_ID, created) VALUES (:team_ID, :participants_ID, :created)";
       $fetch_name = "SELECT name FROM participants WHERE ID=:id";
       $update_teaminate = "UPDATE participants SET teaminated=1 WHERE ID=:id";
       foreach($sortedResult as $team_member) {
         $values = [
           [":team_ID",$next_team_ID],
-          [":participants_ID",$team_member]
+          [":participants_ID",$team_member],
+          [":created",2]
         ];
         $this->db->query($sql,$values);
         $name_values = [

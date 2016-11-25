@@ -24,12 +24,12 @@ for($i=1;$i<=$number_teams_result[0][0];$i++) {
   foreach ($find_team_members_result as $member) {
     # find name, display
     $member_id = $member["participants_ID"];
-    $name_sql = "SELECT name, age FROM participants WHERE ID=:id";
+    $name_sql = "SELECT participants.name, participants.age, team.created FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE ID=:id";
     $values = [
       [":id",$member_id]
     ];
     $name = $db->query($name_sql,$values);
-    echo $name['0']["name"] . " - " . $name['0']['age'] . " år" . "<br />";
+    echo $name['0']["name"] . " - " . $name['0']['age'] . " år - lavet: " . $name['0']['created'] . "<br />";
   }
   echo "<br /><br />";
 }

@@ -49,11 +49,11 @@ if(!isset($_REQUEST['submit'])) {
       die("Du har ikke valgt nogen holddeltagere.");
     } else {
       // we need to know who's already in the team so we can correct
-      $selected_sql = "SELECT participants.ID, participants.name FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE team_ID=:team_ID";
+      $selected_sql = "SELECT participants.ID, participants.name, team.created FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE team_ID=:team_ID";
       $selected_val = [[":team_ID",$team]];
       $team_participants = $db->query($selected_sql,$selected_val);
 
-      $new_in_team_sql = "INSERT INTO team (team_ID, participants_ID) VALUES (:team_ID, :participants_ID)";
+      $new_in_team_sql = "INSERT INTO team (team_ID, participants_ID, created) VALUES (:team_ID, :participants_ID, :created)";
       $nNames = count($names);
       $update_sql = "UPDATE participants SET teaminated=1 WHERE ID=:ID";
       $update_remove_sql = "UPDATE participants SET teaminated=0 WHERE ID=:ID";
@@ -70,7 +70,8 @@ if(!isset($_REQUEST['submit'])) {
         $update_value = [[":ID",$names[$i]]];
         $values = [
           [":team_ID",$_REQUEST['team']],
-          [":participants_ID",$names[$i]]
+          [":participants_ID",$names[$i]],
+          [":created",$team_participants[$i]['created']]
         ];
         $db->query($new_in_team_sql,$values);
         $db->query($update_sql,$update_value);

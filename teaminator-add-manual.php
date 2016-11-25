@@ -4,6 +4,8 @@
 * Used to generate teams at Coding Pirates Game Jam 2015-2016
 */
 
+include("header.php");
+
 if(isset($_REQUEST['submit'])) {
   // Form already filled out
   $sql = "INSERT INTO participants
@@ -46,7 +48,6 @@ if(isset($_REQUEST['submit'])) {
   ];
   $db->query($sql,$values);
 }
-include("header.php");
 ?>
 <h2>KUN hvis du har brug for at tilføje en person manuelt af en eller anden grund. Ellers brug CSV upload!</h2>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">

@@ -62,5 +62,6 @@ foreach($teams as $team) {
 }
 
 fclose($file);
+header("Cache-Control: max-age=0, no-cache, must-revalidate, proxy-revalidate");
 header("Location: hold.csv");
 ?>

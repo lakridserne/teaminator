@@ -82,6 +82,10 @@ if(!isset($_REQUEST['submit'])) {
     $selected_val = [[":team_ID",$team]];
     $team_participants = $db->query($selected_sql,$selected_val);
 
+    $update_sql = "UPDATE participants SET teaminated=1 WHERE ID=:ID";
+    $update_remove_sql = "UPDATE participants SET teaminated=0 WHERE ID=:ID";
+    $remove_sql = "DELETE FROM team WHERE participants_ID=:participants_ID";
+
     foreach($team_participants as $participant) {
       // Remove existing from DB
       $update_value = [[":ID",$participant['ID']]];

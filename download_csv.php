@@ -52,11 +52,13 @@ $headings['textprog'] = "Tekstprogrammering";
 $headings['graphic'] = "Grafik";
 $headings['ultra'] = "Ultra";
 fputcsv($file,$headings, ';', '"');
-foreach($teams as $key => $value) {
-  if(!is_int($key)) {
-    $value = array_unique($value);
-    fputcsv($file,$value, ';', '"');
+foreach($teams as $team) {
+  foreach($team as $key => $value) {
+    if(!is_int($key)) {
+      unlink($team[$key]);
+    }
   }
+  fputcsv($file,$team, ';', '"');
 }
 
 fclose($file);

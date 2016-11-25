@@ -55,7 +55,7 @@ fputcsv($file,$headings, ';', '"');
 foreach($teams as $team) {
   foreach($team as $key => $value) {
     if(!is_int($key)) {
-      unlink($team[$key]);
+      unset($team[$key]);
     }
   }
   fputcsv($file,$team, ';', '"');

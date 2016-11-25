@@ -77,6 +77,19 @@ if(!isset($_REQUEST['submit'])) {
       }
       echo "Hold " . $_REQUEST['team'] . " ændret og har nu " . $nNames . " deltagere.";
     }
+  } else {
+    $selected_sql = "SELECT participants.ID, participants.name FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE team_ID=:team_ID";
+    $selected_val = [[":team_ID",$team]];
+    $team_participants = $db->query($selected_sql,$selected_val);
+
+    foreach($team_participants as $participant) {
+      // Remove existing from DB
+      $update_value = [[":ID",$participant['ID']]];
+      $remove_value = [[":participants_ID",$participant['ID']]];
+      $db->query($update_remove_sql,$update_value);
+      $db->query($remove_sql,$remove_value);
+    }
+    echo "Hold " . $_REQUEST['team'] . " er nu slettet.";
   }
 }
 include("footer.php");

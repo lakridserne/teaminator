@@ -10,7 +10,7 @@ class teamGen {
     $this->db = $db;
   }
 
-  function genTeam($amount,$minage,$maxage,$designers,$visualtext,$ultra) {
+  function genTeam($amount,$minage,$maxage,$designers,$visualtext,$ultra,$team_ID=false) {
     // generate team
     // first see if there enough people to generate a team of selected size in
     // the selected age group
@@ -29,9 +29,13 @@ class teamGen {
       // Yay! Enough! Go ahead and pull the list of candidates from the DB
       $sortedResult = $this->sortInterests($possibleCandidates,$designers,$visualtext,$amount,$numresults);
       // Put people in DB
-      $sql = "SELECT team_ID FROM team ORDER BY team_ID DESC LIMIT 1";
-      $nextid = $this->db->query($sql);
-      $next_team_ID = $nextid['0']["team_ID"] + 1;
+      if($team_ID != false) {
+        $next_team_ID = $team_ID;
+      } else {
+        $sql = "SELECT team_ID FROM team ORDER BY team_ID DESC LIMIT 1";
+        $nextid = $this->db->query($sql);
+        $next_team_ID = $nextid['0']["team_ID"] + 1;
+      }
       $sql = "INSERT INTO team (team_ID,participants_ID) VALUES (:team_ID, :participants_ID)";
       $fetch_name = "SELECT name FROM participants WHERE ID=:id";
       $update_teaminate = "UPDATE participants SET teaminated=1 WHERE ID=:id";

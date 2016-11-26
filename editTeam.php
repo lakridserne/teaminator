@@ -36,6 +36,8 @@ if(!isset($_REQUEST['submit'])) {
       ?>
     </select>
     <br />
+    DR Ultra må gerne følge holdet: <input type="checkbox" name="ultra" value="ultra" />
+    <br />
     <button name="submit" type="submit" class="btn btn-default btn-block">Ret hold</button>
   </form>
   <script>var names = $('.names').bootstrapDualListbox({moveOnSelect:false});</script>
@@ -55,9 +57,15 @@ if(!isset($_REQUEST['submit'])) {
 
       $new_in_team_sql = "INSERT INTO team (team_ID, participants_ID, created) VALUES (:team_ID, :participants_ID, :created)";
       $nNames = count($names);
-      $update_sql = "UPDATE participants SET teaminated=1 WHERE ID=:ID";
+      $update_sql = "UPDATE participants SET teaminated=1, ultra=:ultra WHERE ID=:ID";
       $update_remove_sql = "UPDATE participants SET teaminated=0 WHERE ID=:ID";
       $remove_sql = "DELETE FROM team WHERE participants_ID=:participants_ID";
+
+      if(isset($_REQUEST['ultra'])) {
+        $ultra = true;
+      } else {
+        $ultra = false;
+      }
 
       foreach($team_participants as $participant) {
         // Remove existing from DB
@@ -67,7 +75,10 @@ if(!isset($_REQUEST['submit'])) {
         $db->query($remove_sql,$remove_value);
       }
       for($i=0;$i < $nNames;$i++) {
-        $update_value = [[":ID",$names[$i]]];
+        $update_value = [
+          [":ID",$names[$i]],
+          [":ultra",$ultra]
+        ];
         $values = [
           [":team_ID",$_REQUEST['team']],
           [":participants_ID",$names[$i]],

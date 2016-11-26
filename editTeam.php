@@ -19,7 +19,7 @@ if(!isset($_REQUEST['submit'])) {
   // Fetch names
   $sql = "SELECT ID, name, age FROM participants WHERE teaminated=0";
   $names = $db->query($sql);
-  $selected_sql = "SELECT participants.ID, participants.name, participants.age FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE team_ID=:team_ID";
+  $selected_sql = "SELECT participants.ID, participants.name, participants.ultra, participants.age FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE team_ID=:team_ID";
   $selected_val = [[":team_ID",$team]];
   $team_participants = $db->query($selected_sql,$selected_val);
   ?>
@@ -36,7 +36,7 @@ if(!isset($_REQUEST['submit'])) {
       ?>
     </select>
     <br />
-    DR Ultra må gerne følge holdet: <input type="checkbox" name="ultra" value="ultra" />
+    DR Ultra må gerne følge holdet: <input type="checkbox" name="ultra" value="ultra" <?php if($team_participants[0]['ultra'] == 1) { echo "checked"; } ?> />
     <br />
     <button name="submit" type="submit" class="btn btn-default btn-block">Ret hold</button>
   </form>

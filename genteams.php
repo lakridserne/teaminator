@@ -14,7 +14,6 @@ Maks alder: <input type="number" name="maxage" /><br />
 Antal designere: <input type="number" name="designers" /><br />
 Team med visuel programmering <input type="radio" name="visualtext" value="visualprog" /><br />
 Team med tekstprogrammering <input type="radio" name="visualtext" value="textprog" /><br />
-DR Ultra må følge team <input type="checkbox" name="ultra" value="ultra" /><br />
 Tilføj til holdnummer (efterlad blank for at lave nyt hold) <input type="number" name="team_ID" /><br />
 <input type="submit" name="submit" value="Generer team" />
 </form>
@@ -26,9 +25,9 @@ if(isset($_REQUEST['submit'])) {
   <pre>
   <?php
   if(isset($_REQUEST['team_ID'])) {
-    print_r($team->genTeam($_REQUEST['teamsize'],$_REQUEST['minage'],$_REQUEST['maxage'],$_REQUEST['designers'],$_REQUEST['visualtext'],$_REQUEST['ultra'],$_REQUEST['team_ID']));
+    print_r($team->genTeam($_REQUEST['teamsize'],$_REQUEST['minage'],$_REQUEST['maxage'],$_REQUEST['designers'],$_REQUEST['visualtext'],$_REQUEST['team_ID']));
   } else {
-    print_r($team->genTeam($_REQUEST['teamsize'],$_REQUEST['minage'],$_REQUEST['maxage'],$_REQUEST['designers'],$_REQUEST['visualtext'],$_REQUEST['ultra']));
+    print_r($team->genTeam($_REQUEST['teamsize'],$_REQUEST['minage'],$_REQUEST['maxage'],$_REQUEST['designers'],$_REQUEST['visualtext']));
   }
   ?>
   </pre>
@@ -44,7 +43,6 @@ if(isset($_REQUEST['submit'])) {
   $sql_vis = "SELECT * FROM participants WHERE teaminated=0 AND updated_since_csv=1 AND age=:age AND visualprog=1";
   $sql_tex = "SELECT * FROM participants WHERE teaminated=0 AND updated_since_csv=1 AND age=:age AND textprog=1";
   $sql_des = "SELECT * FROM participants WHERE teaminated=0 AND updated_since_csv=1 AND age=:age AND graphic=1";
-  $sql_ultra = "SELECT * FROM participants WHERE teaminated=0 AND updated_since_csv=1 AND age=:age AND ultra=1";
   for($i=7;$i<=17;$i++) {
     $sql_val = [[":age",$i]];
     if($db->count($sql_gen,$sql_val) > 0) {
@@ -53,7 +51,6 @@ if(isset($_REQUEST['submit'])) {
       echo $db->count($sql_vis,$sql_val) . " visuelle<br />";
       echo $db->count($sql_tex,$sql_val) . " tekst<br />";
       echo $db->count($sql_des,$sql_val) . " designere<br />";
-      echo $db->count($sql_ultra,$sql_val) . " ultra<br />";
     }
   }
   ?>

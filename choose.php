@@ -8,32 +8,14 @@ include("header.php");
 
 if(isset($_REQUEST['submit'])) {
   // now find the data
-  if(isset($_REQUEST['visualprog'])) {
-    $visualprog = true;
-  } else {
-    $visualprog = false;
-  }
-  if(isset($_REQUEST['textprog'])) {
-    $textprog = true;
-  } else {
-    $textprog = false;
-  }
-  if(isset($_REQUEST['graphic'])) {
-    $graphic = true;
-  } else {
-    $graphic = false;
-  }
-  if(isset($_REQUEST['ultra'])) {
-    $ultra = true;
-  } else {
-    $ultra = false;
-  }
-  $update_sql = "UPDATE participants SET visualprog=:visualprog, textprog=:textprog, graphic=:graphic, ultra=:ultra, updated_since_csv=1 WHERE ID=:ID";
+  $visualprog = isset($_REQUEST['visualprog']) ? true : false;
+  $textprog = isset($_REQUEST['textprog']) ? true : false;
+  $graphic = isset($_REQUEST['graphic']) ? true : false;
+  $update_sql = "UPDATE participants SET visualprog=:visualprog, textprog=:textprog, graphic=:graphic, updated_since_csv=1 WHERE ID=:ID";
   $values = [
     [":visualprog",$visualprog],
     [":textprog",$textprog],
     [":graphic",$graphic],
-    [":ultra",$ultra],
     [":ID",$_REQUEST['names_select']]
   ];
   $db->query($update_sql,$values);
@@ -58,8 +40,6 @@ $names = $db->query($fetch_names_sql);
   <input type="checkbox" name="textprog" value="textprog" /><br />
   <label for="graphic">Grafik / game design</label>
   <input type="checkbox" name="graphic" value="graphic" /><br />
-  <label for="ultra">DR Ultra må gerne følge mig</label>
-  <input type="checkbox" name="ultra" value="ultra" />
 
   <button type="submit" name="submit" class="btn btn-default btn-block">Opdater interesser</button>
 </form>

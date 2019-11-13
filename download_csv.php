@@ -42,7 +42,7 @@ if(file_exists('hold.csv')) {
 }
 $file = fopen("hold.csv","w");
 
-$team_sql = "SELECT participants.name, participants.age,team.team_ID,participants.visualprog,participants.textprog,participants.graphic,participants.ultra FROM participants INNER JOIN team ON participants.ID=team.participants_ID ORDER BY team.team_ID,participants.name";
+$team_sql = "SELECT participants.name, participants.age,team.team_ID,participants.visualprog,participants.textprog,participants.graphic FROM participants INNER JOIN team ON participants.ID=team.participants_ID ORDER BY team.team_ID,participants.name";
 $teams = $db->query($team_sql);
 $headings['name'] = "Navn";
 $headings['age'] = "Alder";
@@ -50,7 +50,6 @@ $headings['team_ID'] = "Holdnummer";
 $headings['visualprog'] = "Visuel programmering";
 $headings['textprog'] = "Tekstprogrammering";
 $headings['graphic'] = "Grafik";
-$headings['ultra'] = "Ultra";
 fputcsv($file,$headings, ';', '"');
 foreach($teams as $team) {
   foreach($team as $key => $value) {

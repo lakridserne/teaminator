@@ -14,11 +14,7 @@ class teamGen {
     // generate team
     // first see if there enough people to generate a team of selected size in
     // the selected age group
-    if($ultra != 1) {
-      $sql = "SELECT * FROM participants WHERE age BETWEEN :minage AND :maxage AND teaminated=0 AND updated_since_csv=1";
-    } else {
-      $sql = "SELECT * FROM participants WHERE age BETWEEN :minage AND :maxage AND teaminated=0 AND updated_since_csv=1 AND ultra=1";
-    }
+    $sql = "SELECT * FROM participants WHERE age BETWEEN :minage AND :maxage AND teaminated=0 AND updated_since_csv=1";
     $ages = [
       [":minage",$minage],
       [":maxage",$maxage]

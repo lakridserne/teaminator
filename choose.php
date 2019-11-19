@@ -8,9 +8,9 @@ include("header.php");
 
 if(isset($_REQUEST['submit'])) {
   // now find the data
-  $visualprog = isset($_REQUEST['visualprog']) ? true : false;
-  $textprog = isset($_REQUEST['textprog']) ? true : false;
-  $graphic = isset($_REQUEST['graphic']) ? true : false;
+  $visualprog = isset($_REQUEST['visualprog']) ? 1 : 0;
+  $textprog = isset($_REQUEST['textprog']) ? 1 : 0;
+  $graphic = isset($_REQUEST['graphic']) ? 1 : 0;
   $update_sql = "UPDATE participants SET visualprog=:visualprog, textprog=:textprog, graphic=:graphic, updated_since_csv=1 WHERE ID=:ID";
   $values = [
     [":visualprog",$visualprog],

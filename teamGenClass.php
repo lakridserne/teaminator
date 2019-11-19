@@ -10,7 +10,7 @@ class teamGen {
     $this->db = $db;
   }
 
-  function genTeam($amount,$minage,$maxage,$designers,$visualtext,$ultra,$team_ID=false) {
+  function genTeam($amount,$minage,$maxage,$designers,$visualtext,$team_ID=false) {
     // generate team
     // first see if there enough people to generate a team of selected size in
     // the selected age group

@@ -19,7 +19,7 @@ if(!isset($_REQUEST['submit'])) {
   // Fetch names
   $sql = "SELECT ID, name, age FROM participants WHERE teaminated=0";
   $names = $db->query($sql);
-  $selected_sql = "SELECT participants.ID, participants.name, participants.ultra, participants.age FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE team_ID=:team_ID";
+  $selected_sql = "SELECT participants.ID, participants.name, participants.age FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE team_ID=:team_ID";
   $selected_val = [[":team_ID",$team]];
   $team_participants = $db->query($selected_sql,$selected_val);
   ?>
@@ -66,14 +66,22 @@ if(!isset($_REQUEST['submit'])) {
         $db->query($update_remove_sql,$update_value);
         $db->query($remove_sql,$remove_value);
       }
-      for($i=0;$i < $nNames;$i++) {
+      
+      foreach($names as $name) {
+        // Test if current name exists
+        $created = 1;
+        foreach($team_participants as $participant) {
+          if($name == $participant['ID']) {
+            $created = $participant['created'];
+          }
+        }
         $update_value = [
-          [":ID",$names[$i]]
+          [":ID",$name]
         ];
         $values = [
           [":team_ID",$_REQUEST['team']],
-          [":participants_ID",$names[$i]],
-          [":created",$team_participants[$i]['created']]
+          [":participants_ID",$name],
+          [":created",$created]
         ];
         $db->query($new_in_team_sql,$values);
         $db->query($update_sql,$update_value);

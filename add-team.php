@@ -41,13 +41,13 @@ if(!isset($_REQUEST['submit'])) {
       $next_team_ID = $nextid['0']["team_ID"] + 1;
       $update_sql = "UPDATE participants SET teaminated=1 WHERE ID=:ID";
 
-      for($i=0;$i < $nNames;$i++) {
+      foreach($names as $name) {
         $update_value = [
-          [":ID",$names[$i]]
+          [":ID",$name]
         ];
         $values = [
           [":team_ID",$next_team_ID],
-          [":participants_ID",$names[$i]],
+          [":participants_ID",$name],
           [":created",1]
         ];
         $db->query($sql,$values);

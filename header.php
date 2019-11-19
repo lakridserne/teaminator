@@ -41,9 +41,9 @@ function echoActiveClassIfRequestMatches($requestUri)
 }
 ?>
 <!DOCTYPE html>
-<head>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <title>Coding Pirates Teaminator</title>
-  <meta charset="utf-8">
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -56,7 +56,7 @@ function echoActiveClassIfRequestMatches($requestUri)
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="<?php echo $teaminator_url; ?>" title="Coding Pirates Teaminator">Coding Pirates Teaminator til Coding Pirates Gamejam 2016!</a>
+      <a class="navbar-brand" href="<?php echo $teaminator_url; ?>" title="Coding Pirates Teaminator">Coding Pirates Teaminator til Coding Pirates Gamejam 2019!</a>
     </div>
     <ul class="nav navbar-nav">
       <li <?php echo echoActiveClassIfRequestMatches("index"); ?>>

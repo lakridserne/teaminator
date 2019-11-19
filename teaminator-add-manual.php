@@ -13,9 +13,9 @@ if(isset($_REQUEST['submit'])) {
     VALUES (:name, :age, :visualprog, :textprog, :graphic, true, false)";
 
   // if statements determining whether the interests should be true or false
-  $visualprog = isset($_REQUEST['visualprog']) ? true : false;
-  $textprog = isset($_REQUEST['textprog']) ? true : false;
-  $graphic = isset($_REQUEST['graphic']) ? true : false;
+  $visualprog = isset($_REQUEST['visualprog']) ? 1 : 0;
+  $textprog = isset($_REQUEST['textprog']) ? 1 : 0;
+  $graphic = isset($_REQUEST['graphic']) ? 1 : 0;
 
   // make array with list of values
   $values = [
@@ -26,6 +26,7 @@ if(isset($_REQUEST['submit'])) {
     [":graphic", $graphic]
   ];
   $db->query($sql,$values);
+  echo $_REQUEST['name'] . " er oprettet!";
 }
 ?>
 <h2>KUN hvis du har brug for at tilføje en person manuelt af en eller anden grund. Ellers brug CSV upload!</h2>

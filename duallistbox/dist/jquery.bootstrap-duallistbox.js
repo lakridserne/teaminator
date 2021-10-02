@@ -1,7 +1,7 @@
 /*
- *  Bootstrap Duallistbox - v3.0.6
+ *  Bootstrap Duallistbox - v3.0.9
  *  A responsive dual listbox widget optimized for Twitter Bootstrap. It works on all modern browsers and on touch devices.
- *  http://www.virtuosoft.eu/code/bootstrap-duallistbox/
+ *  https://www.virtuosoft.eu/code/bootstrap-duallistbox/
  *
  *  Made by István Ujj-Mészáros
  *  Under Apache License v2.0 License
@@ -18,6 +18,7 @@
       removeSelectedLabel: 'Remove selected',
       removeAllLabel: 'Remove all',
       moveOnSelect: true,                                                                 // true/false (forced true on androids, see the comment later)
+      moveOnDoubleClick: true,                                                            // true/false (forced false on androids, cause moveOnSelect is forced to true)
       preserveSelectionOnMove: false,                                                     // 'all' / 'moved' / false
       selectedListLabel: false,                                                           // 'string', false
       nonSelectedListLabel: false,                                                        // 'string', false
@@ -205,10 +206,13 @@
     selectopt.detach().appendTo(select);
   }
 
-  function sortOptions(select) {
+  function sortOptions(select, dualListbox) {
     select.find('option').sort(function(a, b) {
       return ($(a).data('original-index') > $(b).data('original-index')) ? 1 : -1;
     }).appendTo(select);
+
+    // workaround for chromium bug: https://bugs.chromium.org/p/chromium/issues/detail?id=1072475
+    refreshSelects(dualListbox);
   }
 
   function clearSelections(dualListbox) {
@@ -237,7 +241,7 @@
     if(dualListbox.settings.sortByInputOrder){
         sortOptionsByInputOrder(dualListbox.elements.select2);
     } else {
-        sortOptions(dualListbox.elements.select2);
+        sortOptions(dualListbox.elements.select2, dualListbox);
     }
   }
 
@@ -258,7 +262,7 @@
 
     refreshSelects(dualListbox);
     triggerChangeEvent(dualListbox);
-    sortOptions(dualListbox.elements.select1);
+    sortOptions(dualListbox.elements.select1, dualListbox);
     if(dualListbox.settings.sortByInputOrder){
         sortOptionsByInputOrder(dualListbox.elements.select2);
     }
@@ -448,6 +452,7 @@
       this.setRemoveSelectedLabel(this.settings.removeSelectedLabel);
       this.setRemoveAllLabel(this.settings.removeAllLabel);
       this.setMoveOnSelect(this.settings.moveOnSelect);
+      this.setMoveOnDoubleClick(this.settings.moveOnDoubleClick);
       this.setPreserveSelectionOnMove(this.settings.preserveSelectionOnMove);
       this.setSelectedListLabel(this.settings.selectedListLabel);
       this.setNonSelectedListLabel(this.settings.nonSelectedListLabel);
@@ -575,6 +580,30 @@
       }
       return this.element;
     },
+    setMoveOnDoubleClick: function(value, refresh) {
+      if (isBuggyAndroid) {
+        value = false;
+      }
+      this.settings.moveOnDoubleClick = value;
+      if (this.settings.moveOnDoubleClick) {
+        this.container.addClass('moveondoubleclick');
+        var self = this;
+        this.elements.select1.on('dblclick', function() {
+          move(self);
+        });
+        this.elements.select2.on('dblclick', function() {
+          remove(self);
+        });
+      } else {
+        this.container.removeClass('moveondoubleclick');
+        this.elements.select1.off('dblclick');
+        this.elements.select2.off('dblclick');
+      }
+      if (refresh) {
+        refreshSelects(this);
+      }
+      return this.element;
+    },
     setPreserveSelectionOnMove: function(value, refresh) {
       // We are forcing to move on select and disabling preserveSelectionOnMove on Android
       if (isBuggyAndroid) {
@@ -676,6 +705,13 @@
     },
     setInfoText: function(value, refresh) {
       this.settings.infoText = value;
+      if (value) {
+        this.elements.info1.show();
+        this.elements.info2.show();
+      } else {
+        this.elements.info1.hide();
+        this.elements.info2.hide();
+      }
       if (refresh) {
         refreshSelects(this);
       }

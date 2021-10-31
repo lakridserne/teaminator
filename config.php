@@ -1,9 +1,9 @@
 <?php
 class config {
-	private $host = env('HOST', 'localhost');
-	private $user = env('USER', 'user');
-	private $pass = env('PASS', 'password');
-	private $db = env('DB', 'database');
+	private $host = getenv('HOST');
+	private $user = getenv('USER');
+	private $pass = getenv('PASS');
+	private $db = getenv('DB');
 
 	public function get_db() {
 		return $this->db;

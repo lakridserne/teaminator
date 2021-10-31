@@ -1,23 +1,35 @@
 <?php
 class config {
-	private $host = getenv('HOST');
-	private $user = getenv('USER');
-	private $pass = getenv('PASS');
-	private $db = getenv('DB');
+	private $host;
+	private $user;
+	private $pass;
+	private $db;
 
-	public function get_db() {
+	public function __construct()
+	{
+		$host = getenv('HOST');
+		$user = getenv('USER');
+		$pass = getenv('PASS');
+		$db = getenv('DB');
+	}
+
+	public function get_db()
+	{
 		return $this->db;
 	}
 
-	public function get_host() {
+	public function get_host()
+	{
 		return $this->host;
 	}
 
-	public function get_user() {
+	public function get_user()
+	{
 		return $this->user;
 	}
 
-	public function get_pass() {
+	public function get_pass()
+	{
 		return $this->pass;
 	}
 }

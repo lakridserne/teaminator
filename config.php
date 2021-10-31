@@ -7,10 +7,10 @@ class config {
 
 	public function __construct()
 	{
-		$host = getenv('HOST');
-		$user = getenv('USER');
-		$pass = getenv('PASS');
-		$db = getenv('DB');
+		$this->host = getenv('HOST');
+		$this->user = getenv('USER');
+		$this->pass = getenv('PASS');
+		$this->db = getenv('DB');
 	}
 
 	public function get_db()

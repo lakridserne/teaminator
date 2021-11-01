@@ -11,7 +11,7 @@ class config {
 		$this->path = __DIR__ . '/.env';
 		$this->load_dotenv();
 		$this->host = getenv('HOST');
-		$this->dbuser = getenv('USER');
+		$this->dbuser = getenv('DB_USER');
 		$this->pass = getenv('PASS');
 		$this->db = getenv('DB');
 	}

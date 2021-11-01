@@ -43,7 +43,7 @@ class DB{
     }
     $config = new config;
     $dsn = "mysql:dbname=" . $config->get_db() . ";host=" . $config->get_host() . ";charset=utf8mb4";
-    $user = $config->get_user();
+    $user = $config->get_dbuser();
     $password = $config->get_pass();
 
     try {

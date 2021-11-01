@@ -1,7 +1,7 @@
 <?php
 class config {
 	private $host;
-	private $user;
+	private $dbuser;
 	private $pass;
 	private $db;
 	protected $path;
@@ -11,7 +11,7 @@ class config {
 		$this->path = __DIR__ . '/.env';
 		$this->load_dotenv();
 		$this->host = getenv('HOST');
-		$this->user = getenv('USER');
+		$this->dbuser = getenv('USER');
 		$this->pass = getenv('PASS');
 		$this->db = getenv('DB');
 	}
@@ -51,9 +51,9 @@ class config {
 		return $this->host;
 	}
 
-	public function get_user()
+	public function get_dbuser()
 	{
-		return $this->user;
+		return $this->dbuser;
 	}
 
 	public function get_pass()

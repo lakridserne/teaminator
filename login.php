@@ -60,8 +60,7 @@ include("header.php");
         // We're in - go to next page
         header("Location: " . $teaminator_url);
       } else {
-        echo "Hej";
-        //header("Location: " . $teaminator_url . "login.php");
+        header("Location: " . $teaminator_url . "login.php");
       }
     } else {
       header("Location: " . $teaminator_url . "login.php");

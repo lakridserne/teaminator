@@ -11,15 +11,19 @@ if(isset($_REQUEST['submit'])) {
   $visualprog = isset($_REQUEST['visualprog']) ? 1 : 0;
   $textprog = isset($_REQUEST['textprog']) ? 1 : 0;
   $graphic = isset($_REQUEST['graphic']) ? 1 : 0;
-  $update_sql = "UPDATE participants SET visualprog=:visualprog, textprog=:textprog, graphic=:graphic, updated_since_csv=1 WHERE ID=:ID";
-  $values = [
-    [":visualprog",$visualprog],
-    [":textprog",$textprog],
-    [":graphic",$graphic],
-    [":ID",$_REQUEST['names_select']]
-  ];
-  $db->query($update_sql,$values);
-  echo "Opdateret<br />";
+  if (!$visualprog && !$textprog && !$graphic) {
+      echo "Husk at vælge interesser!";
+  } else {
+      $update_sql = "UPDATE participants SET visualprog=:visualprog, textprog=:textprog, graphic=:graphic, updated_since_csv=1 WHERE ID=:ID";
+      $values = [
+        [":visualprog",$visualprog],
+        [":textprog",$textprog],
+        [":graphic",$graphic],
+        [":ID",$_REQUEST['names_select']]
+      ];
+      $db->query($update_sql,$values);
+      echo "Opdateret<br />";
+  }
 }
 
 $fetch_names_sql = "SELECT ID, name FROM participants WHERE teaminated=0 AND updated_since_csv=0";

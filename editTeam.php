@@ -17,7 +17,7 @@ if(!isset($_REQUEST['team'])) {
 if(!isset($_REQUEST['submit'])) {
   // Form not submitted yet
   // Fetch names
-  $sql = "SELECT ID, name, age FROM participants WHERE teaminated=0";
+  $sql = "SELECT ID, name, age FROM participants WHERE teaminated=0 AND updated_since_csv=1";
   $names = $db->query($sql);
   $selected_sql = "SELECT participants.ID, participants.name, participants.age FROM participants INNER JOIN team ON participants.ID=team.participants_ID WHERE team_ID=:team_ID";
   $selected_val = [[":team_ID",$team]];

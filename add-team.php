@@ -10,7 +10,7 @@ include("header.php");
 if(!isset($_REQUEST['submit'])) {
   // Form not submitted yet
   // Fetch names
-  $sql = "SELECT ID, name, age FROM participants WHERE teaminated=0";
+  $sql = "SELECT ID, name, age FROM participants WHERE teaminated=0 AND updated_since_csv=1";
   $names = $db->query($sql);
   ?>
   <form class="names" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">

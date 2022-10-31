@@ -1,5 +1,5 @@
 <?php
-$teaminator_url = "https://www.rathhansen.com/teaminator/";
+$teaminator_url = "https://rathhansen.com/teaminator/";
 include_once("dbConnect.php");
 $db = new DB;
 session_start();
@@ -56,7 +56,7 @@ function echoActiveClassIfRequestMatches($requestUri)
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="<?php echo $teaminator_url; ?>" title="Coding Pirates Teaminator">Coding Pirates Teaminator til Coding Pirates Gamejam 2021!</a>
+      <a class="navbar-brand" href="<?php echo $teaminator_url; ?>" title="Coding Pirates Teaminator">Coding Pirates Teaminator til Coding Pirates Gamejam 2022!</a>
     </div>
     <ul class="nav navbar-nav">
       <li <?php echo echoActiveClassIfRequestMatches("index"); ?>>

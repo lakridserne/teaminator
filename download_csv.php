@@ -4,7 +4,7 @@
 * Used to generate teams at Coding Pirates Game Jam 2015-2016
 */
 
-$teaminator_url = "https://www.rathhansen.com/teaminator/";
+$teaminator_url = "https://rathhansen.com/teaminator/";
 include_once("dbConnect.php");
 $db = new DB;
 session_start();

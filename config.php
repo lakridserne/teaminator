@@ -1,24 +1,24 @@
 <?php
 class config {
-	private $host;
-	private $dbuser;
-	private $pass;
-	private $db;
-	protected $path;
+    private $dbhost;
+    private $dbuser;
+    private $dbpass;
+    private $dbname;
+    protected $path;
 
-	public function __construct()
-	{
-		$this->path = __DIR__ . '/.env';
-		$this->load_dotenv();
-		$this->host = getenv('HOST');
-		$this->dbuser = getenv('DB_USER');
-		$this->pass = getenv('PASS');
-		$this->db = getenv('DB');
-	}
+    public function __construct()
+    {
+        $this->path = __DIR__ . '/.env';
+        $this->load_dotenv();
+        $this->dbhost = getenv('DB_HOST');
+        $this->dbuser = getenv('DB_USER');
+        $this->dbpass = getenv('DB_PASS');
+        $this->dbname = getenv('DB_NAME');
+    }
 
-	public function load_dotenv()
-	{
-		if (!is_readable($this->path)) {
+    public function load_dotenv(): void
+    {
+        if (!is_readable($this->path)) {
             throw new \RuntimeException(sprintf('%s file is not readable', $this->path));
         }
 
@@ -39,26 +39,26 @@ class config {
                 $_SERVER[$name] = $value;
             }
         }
-	}
+    }
 
-	public function get_db()
-	{
-		return $this->db;
-	}
+    public function get_dbname(): string
+    {
+        return $this->dbname;
+    }
 
-	public function get_host()
-	{
-		return $this->host;
-	}
+    public function get_dbhost(): string
+    {
+        return $this->dbhost;
+    }
 
-	public function get_dbuser()
-	{
-		return $this->dbuser;
-	}
+    public function get_dbuser(): string
+    {
+        return $this->dbuser;
+    }
 
-	public function get_pass()
-	{
-		return $this->pass;
-	}
+    public function get_dbpass(): string
+    {
+        return $this->dbpass;
+    }
 }
 ?>

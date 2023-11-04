@@ -42,9 +42,9 @@ class DB{
       die("No config file");
     }
     $config = new config;
-    $dsn = "mysql:dbname=" . $config->get_db() . ";host=" . $config->get_host() . ";charset=utf8mb4";
+    $dsn = "mysql:dbname=" . $config->get_dbname() . ";host=" . $config->get_dbhost() . ";charset=utf8mb4";
     $user = $config->get_dbuser();
-    $password = $config->get_pass();
+    $password = $config->get_dbpass();
 
     try {
       $db = new PDO($dsn,$user,$password);

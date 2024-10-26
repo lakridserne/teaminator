@@ -13,7 +13,7 @@ $teams = "SELECT DISTINCT team_ID FROM team ORDER BY team_ID";
 $teams_result = $db->query($teams);
 
 foreach ($teams_result as $team) {
-  ?><h3>Hold <?php echo $team['team_ID']; ?></h3><a href="<?php echo $teaminator_url . 'editTeam.php?team=' . $team['team_id']; ?>" title="Ret hold <?php echo $team['team_ID']; ?>">Ret</a>
+  ?><h3>Hold <?php echo $team['team_ID']; ?></h3><a href="<?php echo $teaminator_url . 'editTeam.php?team=' . $team['team_ID']; ?>" title="Ret hold <?php echo $team['team_ID']; ?>">Ret</a>
   <br />
   <?php
   $find_team_members = "SELECT * FROM team WHERE team_ID=:team_ID";

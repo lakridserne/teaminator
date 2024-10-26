@@ -81,12 +81,13 @@ if(!isset($_REQUEST['submit'])) {
       * This is the indiviual row
       * [0] => Navn
       * [1] => Alder
-      * [2] => Opskrevet
-      * [3] => Tlf (barn)
-      * [4] => Email (barn)
-      * [5] => Tlf (forælder)
-      * [6] => Email (familie)
-      * [7] => Postnummer
+      * [2] => Køn
+      * [3] => Opskrevet
+      * [4] => Tlf (barn)
+      * [5] => Email (barn)
+      * [6] => Tlf (forælder)
+      * [7] => Email (familie)
+      * [8] => Postnummer
       */
       // Jump over first line with headings
       if($firstLine == true) {
@@ -96,13 +97,21 @@ if(!isset($_REQUEST['submit'])) {
       }
 
       // Now make connection to the database and import data
-      $sql = "INSERT INTO participants (name,age,visualprog,textprog,
+      $sql = "INSERT INTO participants (name,age,gender,visualprog,textprog,
                           graphic,updated_since_csv,teaminated)
-                      VALUES (:name,:age,:visualprog,:textprog,:graphic,
+                      VALUES (:name,:age,:gender,:visualprog,:textprog,:graphic,
                         :updated_since_csv,:teaminated)";
+
+      if ($data[2] == "Dreng/Mand") {
+          $gender = 'm';
+      } elseif ($data[2] == 'Pige/Kvinde') {
+          $gender = 'f';
+      }
+
       $values = [
         [":name",$data[0]],
         [":age",$data[1]],
+        [":gender",$gender],
         [":visualprog",0],
         [":textprog",0],
         [":graphic",0],

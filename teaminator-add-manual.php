@@ -9,8 +9,8 @@ include("header.php");
 if(isset($_REQUEST['submit'])) {
   // Form already filled out
   $sql = "INSERT INTO participants
-    (name,age,visualprog,textprog,graphic,updated_since_csv,teaminated)
-    VALUES (:name, :age, :visualprog, :textprog, :graphic, true, false)";
+    (name,age,gender,visualprog,textprog,graphic,updated_since_csv,teaminated)
+    VALUES (:name, :age, :gender, :visualprog, :textprog, :graphic, true, false)";
 
   // if statements determining whether the interests should be true or false
   $visualprog = isset($_REQUEST['visualprog']) ? 1 : 0;
@@ -21,6 +21,7 @@ if(isset($_REQUEST['submit'])) {
   $values = [
     [":name", $_REQUEST['name']],
     [":age", $_REQUEST['age']],
+    [":gender", $_REQUEST['gender']],
     [":visualprog", $visualprog],
     [":textprog", $textprog],
     [":graphic", $graphic]
@@ -32,7 +33,12 @@ if(isset($_REQUEST['submit'])) {
 <h2>KUN hvis du har brug for at tilføje en person manuelt af en eller anden grund. Ellers brug CSV upload!</h2>
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
   Navn: <input type="text" name="name" /><br />
-  Alder <input type="number" name="age" /><br />
+  Alder: <input type="number" name="age" /><br />
+  Køn:
+  <input type="radio" id="male" name="gender" value="m">
+  <label for="male">Dreng</label>
+  <input type="radio" id="female" name="gender" value="f">
+  <label for="female">Pige</label><br />
   Interesser: <br />
   Visuel programmering: <input type="checkbox" name="visualprog" value="visualprog" /><br />
   Tekstprogrammering: <input type="checkbox" name="textprog" value="textprog" /><br />

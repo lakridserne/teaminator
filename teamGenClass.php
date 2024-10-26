@@ -10,14 +10,15 @@ class teamGen {
     $this->db = $db;
   }
 
-  function genTeam($amount,$minage,$maxage,$designers,$visualtext,$team_ID=false) {
+  function genTeam($amount,$minage,$maxage,$gender,$designers,$visualtext,$team_ID=false) {
     // generate team
     // first see if there enough people to generate a team of selected size in
     // the selected age group
-    $sql = "SELECT * FROM participants WHERE age BETWEEN :minage AND :maxage AND teaminated=0 AND updated_since_csv=1";
+    $sql = "SELECT * FROM participants WHERE age BETWEEN :minage AND :maxage AND gender=:gender AND teaminated=0 AND updated_since_csv=1";
     $ages = [
       [":minage",$minage],
-      [":maxage",$maxage]
+      [":maxage",$maxage],
+      [":gender",$gender]
     ];
     $possibleCandidates = $this->db->query($sql,$ages);
     $numresults = count($possibleCandidates);
